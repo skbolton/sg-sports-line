@@ -19,6 +19,7 @@ defmodule Events.Event do
   """
   use Ecto.Schema
   import Ecto.Changeset
+  alias Events.Athlete
 
   @primary_key {:_id, :binary_id, autogenerate: false}
 
@@ -30,6 +31,8 @@ defmodule Events.Event do
     field(:event_end, :utc_datetime)
     field(:sheet_open, :utc_datetime)
     field(:sheet_close, :utc_datetime)
+
+    embeds_many(:athletes, Athlete)
   end
 
   @doc """
@@ -47,5 +50,6 @@ defmodule Events.Event do
       :funds_granted
     ])
     |> validate_required([:name, :event_start, :event_end, :sheet_open, :sheet_close])
+    |> cast_embed(:athletes, with: &Athlete.new_athlete/2)
   end
 end
