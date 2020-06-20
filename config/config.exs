@@ -9,6 +9,14 @@
 # move said applications out of the umbrella.
 import Config
 
+config :db, DB.Repo,
+  database: "sg-sports-line",
+  username: "postgres",
+  password: "",
+  hostname: "localhost"
+
+config :db, ecto_repos: [DB.Repo]
+
 # Sample configuration:
 #
 #     config :logger, :console,
