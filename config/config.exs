@@ -17,10 +17,4 @@ config :db, DB.Repo,
 
 config :db, ecto_repos: [DB.Repo]
 
-# Sample configuration:
-#
-#     config :logger, :console,
-#       level: :info,
-#       format: "$date $time [$level] $metadata$message\n",
-#       metadata: [:user_id]
-#
+import_config "#{Mix.env()}.exs"
