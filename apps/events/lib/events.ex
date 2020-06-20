@@ -3,16 +3,11 @@ defmodule Events do
   Documentation for Events.
   """
 
-  @doc """
-  Hello world.
+  alias DB.Repo
+  alias Events.Event
 
-  ## Examples
-
-      iex> Events.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def create_event(params) do
+    Event.new_event_changeset(%Event{}, params)
+    |> Repo.insert()
   end
 end
