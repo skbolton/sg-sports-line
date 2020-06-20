@@ -1,5 +1,6 @@
 defmodule Sheets.Sheet do
   use Ecto.Schema
+  alias Events.Event
 
   schema "sheets" do
     field :venmo_username, :string
