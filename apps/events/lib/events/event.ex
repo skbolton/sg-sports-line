@@ -1,5 +1,7 @@
 defmodule Events.Event do
   use Ecto.Schema
+  alias Athletes.Athlete
+  alias Events.EventAthlete
 
   schema "events" do
     field :name, :string
@@ -9,6 +11,8 @@ defmodule Events.Event do
     field :funds_granted, :integer, default: 100
     field :sheet_open, :utc_datetime
     field :sheet_closed, :utc_datetime
+    has_many :event_athletes, EventAthlete
+    many_to_many :athletes, Athlete, join_through: EventAthlete
     timestamps()
   end
 end
