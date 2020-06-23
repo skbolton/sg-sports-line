@@ -1,4 +1,4 @@
-import Config
+use Mix.Config
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -17,7 +17,7 @@ config :ui, UIWeb.Endpoint,
       "--mode",
       "development",
       "--watch-stdin",
-      cd: Path.expand("../apps/ui/assets", __DIR__)
+      cd: Path.expand("../assets", __DIR__)
     ]
   ]
 
