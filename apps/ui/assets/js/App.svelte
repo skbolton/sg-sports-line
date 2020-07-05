@@ -1,13 +1,10 @@
 <script>
-  let count = 0
+  import { Router, Link, Route } from "svelte-routing"
+  import Login from "./routes/admin/Login.svelte"
 
-  const increment = () => count++
-  const decrement = () => count--
+  let url = ""
 </script>
 
-<h1 class="title">
-  Hello World, from Svelte!
-</h1>
-<p>The Count is currently: {count}</p>
-<button on:click={increment} class="button is-primary">+</button>
-<button on:click={decrement} class="button is-warning">-</button>
+<Router url="{url}">
+  <Route path="admin/login"component="{Login}"/>
+</Router>
