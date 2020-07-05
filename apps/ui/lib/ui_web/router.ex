@@ -19,6 +19,8 @@ defmodule UIWeb.Router do
     get "/", PageController, :index
   end
 
+  get("/*path", UIWeb.PageController, :index)
+
   # Other scopes may use custom stacks.
   # scope "/api", UIWeb do
   #   pipe_through :api
