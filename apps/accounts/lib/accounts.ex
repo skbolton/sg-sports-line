@@ -2,17 +2,27 @@ defmodule Accounts do
   @moduledoc """
   Documentation for `Accounts`.
   """
+  alias Accounts.User
+  alias DB.Repo
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Accounts.hello()
-      :world
-
+  Registers a new admin
   """
-  def hello do
-    :world
+  def register_user(params) do
+    User.regiseter_user_changeset(%User{}, params)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Converts user to an admin
+  """
+  def make_admin(user_id) do
+    with %User{} = user <- Repo.get(User, user_id),
+         changeset <- User.make_admin_changeset(user) do
+      Repo.update(changeset)
+    else
+      nil ->
+        {:error, "User not found"}
+    end
   end
 end
