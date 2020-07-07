@@ -11,6 +11,8 @@ defmodule UIWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug UIWeb.Auth
   end
 
   scope "/", UIWeb do
