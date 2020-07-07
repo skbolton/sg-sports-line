@@ -25,4 +25,11 @@ defmodule Accounts do
         {:error, "User not found"}
     end
   end
+
+  @doc """
+  Get a user by id
+  """
+  def get_user(id) do
+    Repo.get(User, id)
+  end
 end
