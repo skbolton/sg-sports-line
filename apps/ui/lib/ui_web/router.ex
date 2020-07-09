@@ -25,8 +25,11 @@ defmodule UIWeb.Router do
     pipe_through :api
 
     post "/users", UserController, :create
-  get("/*path", UIWeb.PageController, :index)
+    resources "/sessions", SessionController, only: [:create]
   end
+
+  get("/*path", UIWeb.PageController, :index)
+
   # Other scopes may use custom stacks.
   # scope "/api", UIWeb do
   #   pipe_through :api

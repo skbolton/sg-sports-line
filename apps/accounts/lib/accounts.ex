@@ -32,4 +32,14 @@ defmodule Accounts do
   def get_user(id) do
     Repo.get(User, id)
   end
+
+  def auth_with_email(%{email: email, password: password}) do
+    case Repo.get_by(User, %{email: email}) do
+      %User{} = user ->
+        Argon2.check_pass(user, password)
+
+      nil ->
+        {:error, "User not found"}
+    end
+  end
 end
