@@ -1,10 +1,10 @@
 <script>
   import { Router, Link, Route } from "svelte-routing"
-  import Login from "./routes/admin/Login.svelte"
+  import Admin from "./routes/admin/Admin.svelte"
 
   let url = ""
 </script>
 
 <Router url="{url}">
-  <Route path="admin/login"component="{Login}"/>
+  <Route path="admin/*"component="{Admin}"/>
 </Router>
