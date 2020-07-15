@@ -11,9 +11,9 @@
     <form class="box">
       <h1 class="title has-text-black">Admin Panel</h1>
       <div class="field mb-5">
-        <label class="label">Username</label>
+        <label class="label">Email</label>
         <div class="control has-icons-left">
-          <input class="input" type="text" placeholder="Username">
+          <input class="input" type="text" placeholder="Email">
           <span class="icon is-small is-left">
             <i class="ri-user-fill"></i>
           </span>
