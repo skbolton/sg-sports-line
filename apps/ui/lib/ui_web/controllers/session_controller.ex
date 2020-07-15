@@ -6,8 +6,7 @@ defmodule UIWeb.SessionController do
       {:ok, user} ->
         conn
         |> UIWeb.Auth.login(user)
-        |> put_status(200)
-        |> json(%{})
+        |> json(%{admin: user.admin})
     end
   end
 end
