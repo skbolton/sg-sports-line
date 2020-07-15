@@ -26,7 +26,8 @@ module.exports = (env, options) => {
     devtool: devMode ? 'source-map' : undefined,
     resolve: {
       alias: {
-        svelte: path.resolve('node_modules', 'svelte')
+        svelte: path.resolve('node_modules', 'svelte'),
+        '@common': path.resolve(__dirname, './js/common')
       },
       extensions: ['.mjs', '.js', '.svelte'],
       mainFields: ['svelte', 'browser', 'module', 'main']
