@@ -27,7 +27,8 @@ defmodule Accounts.MixProject do
     [
       {:ecto, "~> 3.4.5"},
       {:comeonin, "~> 5.3.1"},
-      {:argon2_elixir, "~> 2.0"}
+      {:argon2_elixir, "~> 2.0"},
+      {:db, in_umbrella: true}
     ]
   end
 end
