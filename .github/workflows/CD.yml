@@ -3,13 +3,11 @@ name: Elixir CD
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
 
-    name: Build and test
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
