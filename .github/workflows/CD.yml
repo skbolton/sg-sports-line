@@ -35,7 +35,7 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_DEPLOY_KEY }}
-        source: "./_build/prod/rel/server"
+        source: "_build/prod/rel/server/*"
         target: "~/app/"
     - name: Start Release
       uses: appleboy/ssh-action@master
