@@ -6,7 +6,24 @@ defmodule SportsLine.MixProject do
       apps_path: "apps",
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      releases: releases()
+    ]
+  end
+
+  defp releases do
+    [
+      server: [
+        include_executables_for: [:unix],
+        steps: [:assemble, :tar],
+        applications: [
+          accounts: :permanent,
+          db: :permanent,
+          events: :permanent,
+          sheets: :permanent,
+          ui: :permanent
+        ]
+      ]
     ]
   end
 
