@@ -15,7 +15,6 @@ defmodule SportsLine.MixProject do
     [
       server: [
         include_executables_for: [:unix],
-        steps: [:assemble, :tar],
         applications: [
           accounts: :permanent,
           db: :permanent,
