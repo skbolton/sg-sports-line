@@ -43,5 +43,5 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_DEPLOY_KEY }}
-        script: ~/app/_build_prod/rel/server/bin/server daemon
+        script: ./app/_build/prod/rel/server/bin/server daemon
 
