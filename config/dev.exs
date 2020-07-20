@@ -1,5 +1,11 @@
 import Config
 
+config :db, DB.Repo,
+  database: "sg-sports-line",
+  username: "postgres",
+  password: "",
+  hostname: "localhost"
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

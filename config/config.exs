@@ -10,10 +10,10 @@
 import Config
 
 config :db, DB.Repo,
-  database: "sg-sports-line",
-  username: "postgres",
-  password: "",
-  hostname: "localhost"
+  database: System.get_env("DB_NAME"),
+  username: System.get_env("DB_USERNAME"),
+  password: System.get_env("DB_PASSWORD"),
+  hostname: System.get_env("DB_HOST")
 
 config :db, ecto_repos: [DB.Repo]
 

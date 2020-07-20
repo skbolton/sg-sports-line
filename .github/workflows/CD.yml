@@ -17,18 +17,25 @@ jobs:
       with:
         elixir-version: '1.10.3' # Define the elixir version [required]
         otp-version: '22.3' # Define the OTP version [required]
+
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:
         path: deps
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
         restore-keys: ${{ runner.os }}-mix-
+
     - name: Install dependencies
       run: mix deps.get
     - name: Build Release
       run: mix release
       env:
         MIX_ENV: prod
+        DB_NAME: ${{secrets.DB_NME}},
+        DB_USERNAME: ${{ secrets.DB_USERNAME }},
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }},
+        DB_HOST: ${{ secrets.HOST }}
+
     - name: Move release to server
       uses: appleboy/scp-action@master
       with:
@@ -37,6 +44,7 @@ jobs:
         key: ${{ secrets.SSH_DEPLOY_KEY }}
         source: "_build/prod/rel/server/*"
         target: "~/app/"
+
     - name: Start Release
       uses: appleboy/ssh-action@master
       with:
