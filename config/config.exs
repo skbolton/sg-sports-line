@@ -14,7 +14,6 @@ config :db, DB.Repo,
   username: System.get_env("DB_USERNAME"),
   password: System.get_env("DB_PASSWORD"),
   hostname: System.get_env("DB_HOST"),
-  port: System.get_env("DB_PORT", "5432")
 
 config :db, ecto_repos: [DB.Repo]
 
