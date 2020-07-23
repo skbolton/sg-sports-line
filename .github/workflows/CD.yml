@@ -31,7 +31,7 @@ jobs:
       run: mix release
       env:
         MIX_ENV: prod
-        DB_NAME: ${{secrets.DB_NME}},
+        DB_NAME: ${{secrets.DB_NAME}},
         DB_USERNAME: ${{ secrets.DB_USERNAME }},
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }},
         DB_HOST: ${{ secrets.HOST }}
