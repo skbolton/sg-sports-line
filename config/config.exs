@@ -22,7 +22,7 @@ config :ui,
 
 # Configures the endpoint
 config :ui, UIWeb.Endpoint,
-  url: [host: "localhost", port: "4000"],
+  url: [host: "app.hehasimagined.xyz", port: "4000"],
   secret_key_base: "1bR0O2vsLt13gZyx7aYLYoWh/GPGdFzCP+lbkYjjPyNBl2VZdaf/U6sXyQUyv84d",
   render_errors: [view: UIWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: UI.PubSub,
