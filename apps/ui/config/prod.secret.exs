@@ -4,12 +4,6 @@
 # remember to add this file to your .gitignore.
 use Mix.Config
 
-config :ui, UIWeb.Endpoint,
-  http: [
-    port: String.to_integer(System.get_env("PORT") || "4000"),
-    transport_options: [socket_opts: [:inet6]]
-  ],
-
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix
