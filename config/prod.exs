@@ -2,4 +2,4 @@ import Config
 
 config :ui, UIWeb.Endpoint,
   server: true,
-  url: [host: "app.hehasimagined.xyz"]
+  url: [host: "http://app.hehasimagined.xyz"]
