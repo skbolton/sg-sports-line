@@ -4,6 +4,7 @@ defmodule Events.Event do
   alias Athletes.Athlete
   alias Events.EventAthlete
 
+  @derive Jason.Encoder
   schema "events" do
     field :name, :string
     field :event_start, :utc_datetime

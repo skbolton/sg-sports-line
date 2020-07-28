@@ -1,8 +1,9 @@
 <script>
   import {navigate} from 'svelte-routing'
+  import api from '../../api'
 
   let name = ''
-  let eventStartDay = ''
+  let eventStartDate = ''
   let eventStartTime = '09:00:00'
   let eventEndDate = ''
   let eventEndTime = '17:00:00'
@@ -13,8 +14,25 @@
   let sheetCost = '20'
   let fundsGranted = '100'
 
-  $: allFields = [name, eventStartDay, eventStartTime, eventEndDate, eventEndTime, sheetOpenDate, sheetOpenTime, sheetClosedDate, sheetClosedTime, sheetCost, fundsGranted]
+  $: allFields = [name, eventStartDate, eventStartTime, eventEndDate, eventEndTime, sheetOpenDate, sheetOpenTime, sheetClosedDate, sheetClosedTime, sheetCost, fundsGranted]
   $: submittable = allFields.every(Boolean)
+
+  const create = () => {
+    if (!submittable) {
+      return
+    }
+
+    api.events.create({
+      name: name,
+      event_start: `${eventStartDate} ${eventStartTime}`,
+      event_end: `${eventEndDate} ${eventEndTime}`,
+      sheet_open: `${sheetOpenDate} ${sheetOpenTime}`,
+      sheet_closed: `${sheetClosedDate} ${sheetClosedTime}`,
+      sheet_cost: sheetCost,
+      funds_granted: fundsGranted
+    })
+      .then(() => navigate("/admin"))
+  }
 
 </script>
 
@@ -28,7 +46,7 @@
 
 <section class="hero is-link is-fullheight">
   <div class="hero-body aic jcc">
-    <form class="box" on:submit|preventDefault={console.log}>
+    <form class="box" on:submit|preventDefault={create}>
       <h1 class="title has-text-black">New Event</h1>
 
       <div class="field mb-5">
@@ -44,7 +62,7 @@
       <label class="label">Event Start</label>
       <div class="field mb-5 is-grouped">
         <div class="control has-icons-left is-expanded">
-          <input class="input" type="date" bind:value={eventStartDay} placeholder="Name" on:change={event => eventStartDay = event.target.value}>
+          <input class="input" type="date" bind:value={eventStartDate} placeholder="Name" on:change={event => eventStartDate = event.target.value}>
           <span class="icon is-small is-left">
             <i class="ri-calendar-event-line"></i>
           </span>

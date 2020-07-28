@@ -26,6 +26,7 @@ defmodule UIWeb.Router do
 
     post "/users", UserController, :create
     resources "/sessions", SessionController, only: [:create]
+    post "/events", EventController, :create
   end
 
   get("/*path", UIWeb.PageController, :index)
