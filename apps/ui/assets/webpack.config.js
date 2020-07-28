@@ -1,5 +1,6 @@
 const path = require('path');
 const glob = require('glob');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -62,7 +63,8 @@ module.exports = (env, options) => {
     },
     plugins: [
       new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-      new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
+      new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
+      new webpack.DefinePlugin({ BASE_URL: JSON.stringify(devMode ? 'http://localhost:4000' : '') })
     ]
   }
 };

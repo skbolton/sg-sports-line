@@ -5,7 +5,7 @@ import adminStore from '../storage'
 
 // Create instance
 const instance = axios.create({
-  baseURL: 'http://localhost:4000/api'
+  baseURL: BASE_URL + '/api'
 })
 
 // add interceptors
