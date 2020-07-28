@@ -18,6 +18,8 @@ instance.interceptors.response.use(
     if (error.response && error.response.status == 401) {
       adminStore.clearAdmin()
     }
+
+    return error
   }
 )
 
