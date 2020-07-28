@@ -2,16 +2,20 @@
   import {navigate} from 'svelte-routing'
 
   let name = ''
-  let eventStart = ''
-  let eventEnd = ''
-  let sheetOpen = ''
-  let sheetClosed = ''
+  let eventStartDay = ''
+  let eventStartTime = '09:00:00'
+  let eventEndDate = ''
+  let eventEndTime = '17:00:00'
+  let sheetOpenDate = ''
+  let sheetOpenTime = '09:00:00'
+  let sheetClosedDate = ''
+  let sheetClosedTime = '17:00:00'
   let sheetCost = '20'
   let fundsGranted = '100'
 
-  let allFields = [name, eventStart, eventEnd, sheetOpen, sheetClosed, sheetCost, fundsGranted]
-
+  $: allFields = [name, eventStartDay, eventStartTime, eventEndDate, eventEndTime, sheetOpenDate, sheetOpenTime, sheetClosedDate, sheetClosedTime, sheetCost, fundsGranted]
   $: submittable = allFields.every(Boolean)
+
 </script>
 
 <style>
@@ -24,61 +28,73 @@
 
 <section class="hero is-link is-fullheight">
   <div class="hero-body aic jcc">
-    <form class="box" on:submit|preventDefault={login}>
+    <form class="box" on:submit|preventDefault={console.log}>
       <h1 class="title has-text-black">New Event</h1>
 
       <div class="field mb-5">
         <label class="label">Name</label>
         <div class="control has-icons-left">
-          <input class="input" type="text" bind:value={name} placeholder="Name" on:keypress={event => name = event.target.value}>
+          <input class="input" type="text" bind:value={name} placeholder="The Masters" on:keyup={event => name = event.target.value}>
           <span class="icon is-small is-left">
             <i class="ri-flag-line"></i>
           </span>
         </div>
       </div>
 
-      <div class="field mb-5">
-        <label class="label">Event Start</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" bind:value={eventStart} placeholder="Name" on:keypress={event => eventStart = event.target.value}>
+      <label class="label">Event Start</label>
+      <div class="field mb-5 is-grouped">
+        <div class="control has-icons-left is-expanded">
+          <input class="input" type="date" bind:value={eventStartDay} placeholder="Name" on:change={event => eventStartDay = event.target.value}>
           <span class="icon is-small is-left">
             <i class="ri-calendar-event-line"></i>
           </span>
         </div>
+        <div class="control">
+          <input class="input" type="time" bind:value={eventStartTime} on:change={event => eventStartTime = event.target.value}>
+        </div>
       </div>
 
-      <div class="field mb-5">
-        <label class="label">Event End</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" bind:value={eventEnd} placeholder="Name" on:keypress={event => eventEnd = event.target.value}>
+      <label class="label">Event End</label>
+      <div class="field mb-5 is-grouped">
+        <div class="control has-icons-left is-expanded">
+          <input class="input" type="date" bind:value={eventEndDate} on:change={event => eventEndDate = event.target.value}>
           <span class="icon is-small is-left">
             <i class="ri-calendar-event-line"></i>
           </span>
         </div>
+        <div class="control">
+          <input class="input" type="time" bind:value={eventEndTime} on:change={event => eventEndTime = event.target.value}>
+        </div>
       </div>
 
-      <div class="field mb-5">
-        <label class="label">Sheet Open</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" bind:value={sheetOpen} placeholder="Name" on:keypress={event => sheetOpen = event.target.value}>
+      <label class="label">Sheet Open</label>
+      <div class="field mb-5 is-grouped">
+        <div class="control has-icons-left is-expanded">
+          <input class="input" type="date" bind:value={sheetOpenDate} placeholder="Name" on:change={event => sheetOpenDate = event.target.value}>
           <span class="icon is-small is-left">
             <i class="ri-door-open-line"></i>
           </span>
         </div>
+        <div class="control">
+          <input class="input" type="time" bind:value={sheetOpenTime} on:change={event => sheetOpenTime = event.target.value}>
+        </div>
       </div>
 
-      <div class="field mb-5">
-        <label class="label">Sheet Close</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" bind:value={sheetClosed} placeholder="Name" on:keypress={event => sheetClosed = event.target.value}>
+      <label class="label">Sheet Close</label>
+      <div class="field mb-5 is-grouped">
+        <div class="control has-icons-left is-expanded">
+          <input class="input" type="date" bind:value={sheetClosedDate} placeholder="Name" on:change={event => sheetClosedDate = event.target.value}>
           <span class="icon is-small is-left">
             <i class="ri-door-closed-line"></i>
           </span>
         </div>
+        <div class="control">
+          <input class="input" type="time" bind:value={sheetClosedTime} on:change={event => sheetClosedTime = event.target.value}>
+        </div>
       </div>
 
+      <label class="label">Sheet Cost</label>
       <div class="field mb-5">
-        <label class="label">Sheet Cost</label>
         <div class="control has-icons-left">
           <input class="input" type="text" bind:value={sheetCost} placeholder="20" on:keypress={event => sheetCost = event.target.value}>
           <span class="icon is-small is-left">
