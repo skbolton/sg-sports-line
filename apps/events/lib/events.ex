@@ -3,6 +3,7 @@ defmodule Events do
   Documentation for Events.
   """
 
+  import Ecto.Query
   alias DB.Repo
 
   alias Events.{
@@ -11,6 +12,15 @@ defmodule Events do
   }
 
   alias Athletes.Athlete
+
+  def all do
+    Repo.all(Event)
+  end
+
+  def active do
+    now = DateTime.utc_now()
+    Repo.all(from e in Event, where: e.sheet_open < ^now, where: e.sheet_closed > ^now)
+  end
 
   def create_event(params) do
     Event.new_event_changeset(%Event{}, params)

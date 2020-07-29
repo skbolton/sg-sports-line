@@ -1,6 +1,7 @@
 <script>
   import {Link} from 'svelte-routing'
   import Navbar from '@common/Nav.svelte'
+  import EventList from './EventList.svelte'
 </script>
 
 <style>
@@ -13,7 +14,10 @@
 </style>
 
 <Navbar/>
-<h1 class="title">Events</h1>
+<div class="container">
+  <h1 class="title">Events</h1>
+  <EventList/>
+</div>
 <Link to="create-event">
   <button class="button is-link is-size-4">+</button>
 </Link>

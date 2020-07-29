@@ -6,7 +6,7 @@ defmodule UIWeb.EventController do
 
   require Logger
 
-  plug :ensure_admin when action in [:create]
+  plug :ensure_admin when action in [:create, :all]
 
   def create(conn, %{"event" => event}) do
     case Events.create_event(event) do
@@ -29,5 +29,29 @@ defmodule UIWeb.EventController do
         |> put_status(400)
         |> json(%{error: "There was an error"})
     end
+  end
+
+  def all(conn, _params) do
+    events =
+      Events.all()
+      |> Enum.map(&Map.from_struct/1)
+      |> Enum.map(&Map.delete(&1, :__meta__))
+      |> Enum.map(&Map.delete(&1, :event_athletes))
+      |> Enum.map(&Map.delete(&1, :athletes))
+
+    conn
+    |> json(%{events: events})
+  end
+
+  def active(conn, _params) do
+    events =
+      Events.active()
+      |> Enum.map(&Map.from_struct/1)
+      |> Enum.map(&Map.delete(&1, :__meta__))
+      |> Enum.map(&Map.delete(&1, :event_athletes))
+      |> Enum.map(&Map.delete(&1, :athletes))
+
+    conn
+    |> json(%{events: events})
   end
 end

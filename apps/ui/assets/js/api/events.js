@@ -1,12 +1,12 @@
 const makeEventClient = api => {
-  const allEvents = () =>
-    api.get("/admin/events")
+  const all = () =>
+    api.get("/events/all")
 
   const create = params =>
     api.post("/events", {event: params})
 
   return {
-    allEvents,
+    all,
     create
   }
 }
