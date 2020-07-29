@@ -1,6 +1,6 @@
 <script>
   import api from '../../api'
-  import Event from './Event.svelte'
+  import Event from './EventCard.svelte'
 
   let events = api.events.all()
     .then(api.getData)
