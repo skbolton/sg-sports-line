@@ -9,4 +9,4 @@ config :ui, UIWeb.Endpoint,
 
 config :accounts, Accounts.Authentication,
   issuer: "sg-sports-line",
-  secret_key: System.get_env!("AUTH_SIGNING_KEY")
+  secret_key: System.get_env("AUTH_SIGNING_KEY")
