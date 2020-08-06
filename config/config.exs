@@ -9,6 +9,10 @@
 # move said applications out of the umbrella.
 import Config
 
+config :accounts, Accounts.Authentication,
+  issuer: "sg-sports-line",
+  secret_key: "yKQa6saDwT22ax+LnTj+0nVjetTmcFHMvvhr5HG3PEaaF+qok3IZwNCvOuO7pTZF"
+
 config :db, DB.Repo,
   database: System.get_env("DB_NAME"),
   username: System.get_env("DB_USERNAME"),
