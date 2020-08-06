@@ -26,6 +26,7 @@ defmodule Accounts.MixProject do
   defp deps do
     [
       {:ecto, "~> 3.4.5"},
+      {:guardian, "~> 2.0"},
       {:comeonin, "~> 5.3.1"},
       {:argon2_elixir, "~> 2.0"},
       {:db, in_umbrella: true}
