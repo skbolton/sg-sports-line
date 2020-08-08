@@ -5,6 +5,7 @@ defmodule Events do
 
   import Ecto.Query
   alias DB.Repo
+  alias Accounts.Authentication.Claims
 
   alias Events.{
     Event,
@@ -13,9 +14,11 @@ defmodule Events do
 
   alias Athletes.Athlete
 
-  def all do
-    Repo.all(Event)
+  def all(%{auth: %Claims{admin: true}}) do
+    {:ok, Repo.all(Event)}
   end
+
+  def all(_not_admin), do: {:error, :not_admin}
 
   def active do
     now = DateTime.utc_now()
