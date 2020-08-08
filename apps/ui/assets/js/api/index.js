@@ -1,7 +1,7 @@
 import axios from 'axios'
 import eventClient from './events'
 import userClient from './users'
-import adminStore from '../storage'
+import adminStore from '@stores/admin'
 
 // Create instance
 const instance = axios.create({

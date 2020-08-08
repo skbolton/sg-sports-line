@@ -1,7 +1,7 @@
 <script>
   import { navigate } from 'svelte-routing'
   import api from '../../api'
-  import adminStore from '../../storage.js'
+  import adminStore from '@stores/admin'
 
   let email = ""
   let password = ""

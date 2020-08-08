@@ -28,7 +28,8 @@ module.exports = (env, options) => {
     resolve: {
       alias: {
         svelte: path.resolve('node_modules', 'svelte'),
-        '@common': path.resolve(__dirname, './js/common')
+        '@common': path.resolve(__dirname, './js/common'),
+        '@stores': path.resolve(__dirname, './js/stores'),
       },
       extensions: ['.mjs', '.js', '.svelte'],
       mainFields: ['svelte', 'browser', 'module', 'main']
