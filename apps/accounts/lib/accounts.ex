@@ -34,12 +34,19 @@ defmodule Accounts do
   end
 
   def auth_with_email(%{email: email, password: password}) do
-    case Repo.get_by(User, %{email: email}) do
-      %User{} = user ->
-        Argon2.check_pass(user, password)
-
+    with %User{} = user <- Repo.get_by(User, %{email: email}),
+         {:ok, %User{} = user} <- Argon2.check_pass(user, password),
+         {:ok, token, _claims} <-
+           Accounts.Authentication.encode_and_sign(user) do
+      {:ok, token, user}
+    else
       nil ->
         {:error, "User not found"}
+
+      # TODO: need to figure out what to do here
+      # Probably not a good idea to return what password check returns in error
+      error ->
+        error
     end
   end
 end
