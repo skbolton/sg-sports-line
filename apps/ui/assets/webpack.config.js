@@ -30,6 +30,7 @@ module.exports = (env, options) => {
         svelte: path.resolve('node_modules', 'svelte'),
         '@common': path.resolve(__dirname, './js/common'),
         '@stores': path.resolve(__dirname, './js/stores'),
+        '@api': path.resolve(__dirname, './js/api')
       },
       extensions: ['.mjs', '.js', '.svelte'],
       mainFields: ['svelte', 'browser', 'module', 'main']
