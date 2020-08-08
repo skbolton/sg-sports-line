@@ -6,10 +6,11 @@ defmodule Accounts.Authentication do
     {:ok, to_string(id)}
   end
 
-  def resource_for_claims(%{"sub" => id}) do
+  def resource_from_claims(%{"sub" => id}) do
     case Accounts.get_user(id) do
       nil ->
         {:error, :resource_not_found}
+
       %User{} = user ->
         {:ok, user}
     end
