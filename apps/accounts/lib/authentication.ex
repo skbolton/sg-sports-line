@@ -15,4 +15,6 @@ defmodule Accounts.Authentication do
         {:ok, user}
     end
   end
+
+  def build_claims(claims, %User{admin: admin}, _opts), do: {:ok, Map.put(claims, "admin", admin)}
 end
