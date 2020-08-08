@@ -18,6 +18,7 @@ defmodule UIWeb.Router do
   # This pipeline can be removed once api is fully moved to graph
   pipeline :graph do
     plug :accepts, ["json"]
+    plug UIWeb.Graph.Context
   end
 
   scope "/", UIWeb do
