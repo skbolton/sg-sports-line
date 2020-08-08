@@ -3,12 +3,14 @@ defmodule UIWeb.Graph.Schema do
 
   import_types UIWeb.Graph.Schema.Types
   import_types UIWeb.Graph.Schema.Queries
+  import_types UIWeb.Graph.Schema.Mutations
 
   query do
     import_fields :queries
   end
 
   mutation do
+    import_fields :mutations
   end
 
   subscription do
