@@ -2,13 +2,27 @@ import axios from 'axios'
 import eventClient from './events'
 import userClient from './users'
 import adminStore from '@stores/admin'
+import tokenStore from '@stores/token'
 
 // Create instance
 const instance = axios.create({
   baseURL: BASE_URL + '/api'
 })
 
-// add interceptors
+/*
+ * Interceptors
+ */
+
+// Request
+instance.interceptors.request.use(config => {
+  token = tokenStore.token
+  if (token) {
+    config.headers.authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+// Response
 instance.interceptors.response.use(
   // on success response
   response => response,
