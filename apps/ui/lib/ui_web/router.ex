@@ -15,6 +15,11 @@ defmodule UIWeb.Router do
     plug UIWeb.Auth
   end
 
+  # This pipeline can be removed once api is fully moved to graph
+  pipeline :graph do
+    plug :accepts, ["json"]
+  end
+
   scope "/", UIWeb do
     pipe_through :browser
 
@@ -27,8 +32,15 @@ defmodule UIWeb.Router do
     post "/users", UserController, :create
     resources "/sessions", SessionController, only: [:create]
     post "/events", EventController, :create
-    get "/events/all", EventController, :all
+    get "/events/", EventController, :all
+    get "/events/:id", EventController, :show
     get "/events/active", EventController, :active
+  end
+
+  scope "/graph" do
+    pipe_through :graph
+
+    forward "/", Absinthe.Plug, schema: UIWeb.Graph.Schema
   end
 
   get("/*path", UIWeb.PageController, :index)
