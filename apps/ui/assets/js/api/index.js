@@ -1,12 +1,9 @@
 import axios from 'axios'
-import eventClient from './events'
-import userClient from './users'
-import adminStore from '@stores/admin'
 import tokenStore from '@stores/token'
 
 // Create instance
 const instance = axios.create({
-  baseURL: BASE_URL + '/api'
+  baseURL: BASE_URL + '/graph'
 })
 
 /*
@@ -22,27 +19,12 @@ instance.interceptors.request.use(config => {
   return config
 })
 
-// Response
-instance.interceptors.response.use(
-  // on success response
-  response => response,
-  // on failure
-  // any 401 should clear user state
-  error => {
-    if (error.response && error.response.status == 401) {
-      adminStore.clearAdmin()
-    }
-
-    return error
-  }
-)
-
-// attach specific model clients
-const [ events, users ] = [eventClient, userClient].map(attach => attach(instance))
-
-instance.events = events
-instance.users = users
-
-instance.getData = ({ data }) => data
+instance.graph = (query, variables) => 
+  instance
+    .post("/", {query: query, variables: variables})
+    // axios stores response under data key
+    .then(({ data }) => data)
+    // graphql stores query response under data key
+    .then(({ data }) => data)
 
 export default instance
