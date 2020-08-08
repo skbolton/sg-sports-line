@@ -9,15 +9,11 @@ defmodule UIWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-    plug :fetch_session
-    plug UIWeb.Auth
-  end
-
   # This pipeline can be removed once api is fully moved to graph
   pipeline :graph do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug UIWeb.Auth
     plug UIWeb.Graph.Context
   end
 
@@ -25,17 +21,6 @@ defmodule UIWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-  end
-
-  scope "/api", UIWeb do
-    pipe_through :api
-
-    post "/users", UserController, :create
-    resources "/sessions", SessionController, only: [:create]
-    post "/events", EventController, :create
-    get "/events/", EventController, :all
-    get "/events/:id", EventController, :show
-    get "/events/active", EventController, :active
   end
 
   scope "/graph" do
