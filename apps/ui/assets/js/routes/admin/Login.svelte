@@ -1,22 +1,34 @@
 <script>
   import { navigate } from 'svelte-routing'
-  import api from '../../api'
+  import api from '@api'
+  import decodeJwt from 'jwt-decode'
   import adminStore from '@stores/admin'
+  import tokenStore from '@stores/token'
 
   let email = ""
   let password = ""
 
   $: submittable = email.length > 0 && password.length > 0
 
+  const loginQuery = `
+    mutation requestAuthToken($email: String! $password: String!) {
+      requestAuthToken(email: $email password: $password) {
+        token
+      }
+    }
+  `
+
   const login = () => {
     if (!submittable) {
       return
     }
 
-    api.users.login(email, password)
-      .then(api.getData)
-      .then(({ admin = false }) => {
+    api.graph(loginQuery, { email: email, password: password })
+      .then(({ requestAuthToken }) => {
+        const { token } = requestAuthToken
+        const {admin = false} = decodeJwt(token)
         adminStore.storeAdmin(admin)
+        tokenStore.token = token
         navigate('/admin/')
       })
   }
