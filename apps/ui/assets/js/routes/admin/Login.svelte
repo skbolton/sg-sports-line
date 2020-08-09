@@ -43,10 +43,10 @@
   }
 </style>
 
-<section class="hero is-link is-fullheight">
+<section class="hero is-fullheight">
   <div class="hero-body aic jcc">
     <form class="box" on:submit|preventDefault={login}>
-      <h1 class="title has-text-black">Admin Panel</h1>
+      <h1 class="title">Admin Panel</h1>
       <div class="field mb-5">
         <label class="label">Email</label>
         <div class="control has-icons-left">
@@ -67,7 +67,7 @@
       </div>
       <div class="field mb-5">
         <div class="control">
-          <input type="submit" disabled={!submittable} value="Log in" class="button is-link">
+          <input type="submit" disabled={!submittable} value="Log in" class="button is-primary">
         </div>
       </div>
     </form>
