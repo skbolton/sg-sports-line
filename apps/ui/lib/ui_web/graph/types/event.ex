@@ -3,6 +3,7 @@ defmodule UIWeb.Graph.Schema.Types.Event do
   import_types Absinthe.Type.Custom
 
   object :event do
+    field :id, non_null(:id)
     field :name, non_null(:string)
     @desc "When the actual event starts"
     field :event_start, non_null(:datetime)
