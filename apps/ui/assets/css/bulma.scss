@@ -11,3 +11,8 @@ $title-family: "Archivo Black";
 // dont change the order of these or try to move them up
 @import "~bulma/bulma";
 @import "~bulmaswatch/flatly/_overrides";
+
+// override the overrids....
+.navbar {
+  border-radius: 0;
+}
