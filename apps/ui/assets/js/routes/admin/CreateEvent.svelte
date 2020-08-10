@@ -17,20 +17,29 @@
   $: allFields = [name, eventStartDate, eventStartTime, eventEndDate, eventEndTime, sheetOpenDate, sheetOpenTime, sheetClosedDate, sheetClosedTime, sheetCost, fundsGranted]
   $: submittable = allFields.every(Boolean)
 
+  const createEventMutation = `
+    mutation createEvent($name: String! $eventStart: DateTime! $eventEnd: DateTime! $sheetOpen: DateTime! $sheetClosed: DateTime!) {
+      createEvent(name: $name eventStart: $eventStart eventEnd: $eventEnd sheetOpen: $sheetOpen sheetClosed: $sheetClosed) {
+        id
+      }
+    }
+  `
+
   const create = () => {
     if (!submittable) {
       return
     }
 
-    api.events.create({
+    api.graph(createEventMutation, {
       name: name,
-      event_start: `${eventStartDate} ${eventStartTime}`,
-      event_end: `${eventEndDate} ${eventEndTime}`,
-      sheet_open: `${sheetOpenDate} ${sheetOpenTime}`,
-      sheet_closed: `${sheetClosedDate} ${sheetClosedTime}`,
-      sheet_cost: sheetCost,
-      funds_granted: fundsGranted
+      eventStart: `${eventStartDate} ${eventStartTime}Z`,
+      eventEnd: `${eventEndDate} ${eventEndTime}Z`,
+      sheetOpen: `${sheetOpenDate} ${sheetOpenTime}Z`,
+      sheetClosed: `${sheetClosedDate} ${sheetClosedTime}Z`,
+      sheetCost: sheetCost,
+      fundsGranted: fundsGranted
     })
+      .then(console.log)
       .then(() => navigate("/admin"))
   }
 
