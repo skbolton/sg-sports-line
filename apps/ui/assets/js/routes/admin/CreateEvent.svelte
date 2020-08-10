@@ -44,7 +44,7 @@
   }
 </style>
 
-<section class="hero is-link is-fullheight">
+<section class="hero is-fullheight">
   <div class="hero-body aic jcc">
     <form class="box" on:submit|preventDefault={create}>
       <h1 class="title has-text-black">New Event</h1>
@@ -133,7 +133,7 @@
 
       <div class="field mb-5">
         <div class="control">
-          <input type="submit" disabled={!submittable} value="Create" class="button is-link mr-4">
+          <input type="submit" disabled={!submittable} value="Create" class="button is-primary mr-4">
           <input type="submit" value="Cancel" class="button is-light" on:click={() => navigate("/admin")}>
         </div>
       </div>

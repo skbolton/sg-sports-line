@@ -12,5 +12,6 @@
 
 <Router url="">
   <Route path="login" component="{Login}"></Route>
+  <Route path="create-event" component="{CreateEvent}"></Route>
   <Route component="{Events}" />
 </Router>
