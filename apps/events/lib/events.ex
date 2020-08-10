@@ -25,10 +25,12 @@ defmodule Events do
     Repo.all(from e in Event, where: e.sheet_open < ^now, where: e.sheet_closed > ^now)
   end
 
-  def create_event(params) do
+  def create_event(%{auth: %Claims{admin: true}} = params) do
     Event.new_event_changeset(%Event{}, params)
     |> Repo.insert()
   end
+
+  def create_event(_not_admin), do: {:error, :not_admin}
 
   def add_athlete_to_event(%{event_id: event_id, athlete_id: athlete_id} = params) do
     athlete_task = Task.async(fn -> Repo.get(Athlete, athlete_id) end)
