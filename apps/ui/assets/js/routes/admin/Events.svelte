@@ -21,16 +21,22 @@
 </script>
 
 <style>
+  .event-container {
+    padding: 0px 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
   button {
     position: absolute;
-    bottom: 25px;
-    right: 25px;
+    bottom: 32px;
+    right: 32px;
     border-radius: 50%;
   }
 </style>
 
 <Navbar/>
-<div class="container">
+<div class="event-container">
   <h1 class="title">Events</h1>
   {#await allEvents}
     Loading...

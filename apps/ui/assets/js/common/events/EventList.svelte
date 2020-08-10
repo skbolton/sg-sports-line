@@ -8,7 +8,7 @@
 
 <div class="columns">
   {#each events as event}
-    <div class="column is-one-third-desktop">
+    <div class="column is-half-desktop">
       <EventListItem on:click={() => dispatch('eventClicked', event)} event={event}/>
     </div>
   {/each}
