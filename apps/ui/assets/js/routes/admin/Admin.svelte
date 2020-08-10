@@ -12,8 +12,5 @@
 
 <Router url="">
   <Route path="login" component="{Login}"></Route>
-    <Route path="/event/:id" let:params>
-      <Event id="{params.id}"/>
-    </Route>
   <Route component="{Events}" />
 </Router>
