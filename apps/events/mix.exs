@@ -25,7 +25,8 @@ defmodule Events.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto, "~> 3.4.5"}
+      {:ecto, "~> 3.4.5"},
+      {:accounts, in_umbrella: true}
     ]
   end
 end
