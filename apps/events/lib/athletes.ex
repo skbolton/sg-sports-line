@@ -1,12 +1,15 @@
 defmodule Athletes do
   import Ecto.Query
+  alias Accounts.Authentication.Claims
   alias Athletes.Athlete
   alias DB.Repo
 
-  def create_athlete(params) do
+  def create_athlete(%{auth: %Claims{admin: true}} = params) do
     Athlete.new_athlete_changeset(%Athlete{}, params)
     |> Repo.insert()
   end
+
+  def create_athlete(_not_admin), do: {:error, :not_authorized}
 
   @doc """
   Searches athletes by name given `search` text.
