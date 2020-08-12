@@ -8,5 +8,9 @@ defmodule UIWeb.Graph.Schema.Queries.Athlete do
       arg :search, non_null(:string)
       resolve &Athlete.by_name/2
     end
+
+    field :all_athletes, list_of(:athlete) do
+      resolve &Athlete.all/2
+    end
   end
 end

@@ -4,6 +4,12 @@ defmodule Athletes do
   alias Athletes.Athlete
   alias DB.Repo
 
+  def all(%{auth: %Claims{admin: true}}) do
+    {:ok, Repo.all(Athlete)}
+  end
+
+  def all(_non_admin), do: {:error, :not_authorized}
+
   def create_athlete(%{auth: %Claims{admin: true}} = params) do
     Athlete.new_athlete_changeset(%Athlete{}, params)
     |> Repo.insert()
