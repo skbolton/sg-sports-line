@@ -1,5 +1,5 @@
 <script>
-  import {Link} from 'svelte-routing'
+  import {Link, navigate} from 'svelte-routing'
   import api from '@api'
   import Navbar from '@common/Nav.svelte'
   import EventList from '@common/events/EventList.svelte'
@@ -17,6 +17,12 @@
 
   const allEvents = api.graph(adminEventsQuery)
     .then(({ allEvents }) => allEvents)
+
+  const goToEvent = ({ detail })  => {
+    if (detail.id) {
+      return navigate(`/admin/event/${detail.id}/athletes`)
+    }
+  }
 
 </script>
 
@@ -41,7 +47,7 @@
   {#await allEvents}
     Loading...
     {:then events}
-      <EventList events={events} on:eventClicked={console.log} />
+      <EventList events={events} on:eventClicked={goToEvent} />
   {/await}
 </div>
 <Link to="create-event">
