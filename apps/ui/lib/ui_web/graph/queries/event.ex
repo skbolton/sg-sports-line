@@ -10,5 +10,10 @@ defmodule UIWeb.Graph.Schema.Queries.Event do
     field :all_events, list_of(:event) do
       resolve &Event.all/2
     end
+
+    field :event, :event do
+      arg :id, non_null(:id)
+      resolve &Event.by_id/2
+    end
   end
 end

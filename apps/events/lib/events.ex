@@ -14,6 +14,13 @@ defmodule Events do
 
   alias Athletes.Athlete
 
+  @doc """
+  Gets an event by `id`
+  """
+  def by_id(id) do
+    Repo.get(Event, id)
+  end
+
   def all(%{auth: %Claims{admin: true}}) do
     {:ok, Repo.all(Event)}
   end

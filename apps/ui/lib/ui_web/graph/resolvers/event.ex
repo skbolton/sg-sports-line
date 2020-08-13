@@ -12,4 +12,14 @@ defmodule UIWeb.Graph.Schema.Resolvers.Event do
     |> Map.put(:auth, context[:current_user])
     |> Events.create_event()
   end
+
+  def by_id(%{id: id}, _context) do
+    case Events.by_id(id) do
+      nil ->
+        {:error, :not_found}
+
+      event ->
+        {:ok, event}
+    end
+  end
 end
