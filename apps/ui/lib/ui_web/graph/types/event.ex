@@ -13,5 +13,9 @@ defmodule UIWeb.Graph.Schema.Types.Event do
     field :sheet_open, non_null(:datetime)
     @desc "When sheets can no longer be purchased for the event"
     field :sheet_closed, non_null(:datetime)
+    @desc "How much a sheet costs"
+    field :sheet_cost, non_null(:integer)
+    @desc "How much funds are give for each sheet"
+    field :funds_granted, non_null(:integer)
   end
 end

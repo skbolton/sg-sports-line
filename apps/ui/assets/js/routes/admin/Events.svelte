@@ -20,7 +20,7 @@
 
   const goToEvent = ({ detail })  => {
     if (detail.id) {
-      return navigate(`/admin/event/${detail.id}/athletes`)
+      return navigate(`/admin/event/${detail.id}/details`)
     }
   }
 

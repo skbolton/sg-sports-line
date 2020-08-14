@@ -1,7 +1,10 @@
 <script>
+  import EventForm from '@common/events/EventForm.svelte'
   export let event
 </script>
 
-<div class="box">
-  <h1 class="title">{event.name}</h1>
-</div>
+<EventForm
+  titleText="Edit Event"
+  confirmButtonText="Update"
+  {...event}
+  />
