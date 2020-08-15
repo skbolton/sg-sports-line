@@ -5,6 +5,7 @@
   export let titleText = 'Event'
   export let confirmButtonText = 'Go'
   export let cancelButtonText = 'Cancel'
+  export let loading
 
   // event fields
   export let name = ''
@@ -49,8 +50,8 @@
         eventEnd: new Date(`${eventEndDate} ${eventEndTime}`).toJSON(),
         sheetOpen: new Date(`${sheetOpenDate} ${sheetOpenTime}`).toJSON(),
         sheetClosed: new Date(`${sheetClosedDate} ${sheetClosedTime}`).toJSON(),
-        sheetCost,
-        fundsGranted
+        sheetCost: parseInt(sheetCost),
+        fundsGranted: parseInt(fundsGranted)
       }
     )
   }
@@ -143,7 +144,7 @@
 
   <div class="field mb-5">
     <div class="control">
-      <input type="submit" disabled={!submittable} value={confirmButtonText} class="button is-primary mr-4">
+      <button type="submit" disabled={!submittable} class="button is-primary mr-4" class:is-loading={loading}>{confirmButtonText}</button>
       <input type="submit" value={cancelButtonText} class="button is-light" on:click={() => dispatch('eventCancelled')}>
     </div>
   </div>
