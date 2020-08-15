@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import { format } from 'date-fns'
   // ui properties
   export let titleText = 'Event'
   export let confirmButtonText = 'Go'
@@ -14,15 +15,21 @@
   export let sheetCost = '20'
   export let fundsGranted = '100'
 
+  // Break up dates into date and time elements for different form inputs
+  const DATE_FORMAT = 'yyyy-MM-dd'
+  const TIME_FORMAT = 'hh:mm'
 
-  let eventStartDate = eventStart ? `${new Date(eventStart).getFullYear()}-${new Date(eventStart).getMonth() + 1}-${new Date(eventStart).getDate()}` : '';
-  let eventStartTime = eventStart ? `${(new Date(eventStart).getHours()).toString().padStart(2, '0')}:${(new Date(eventStart).getMinutes()).toString().padStart(2, '0')}` : '';
-  let eventEndDate = eventEnd ? `${new Date(eventEnd).getFullYear()}-${new Date(eventEnd).getMonth() + 1}-${new Date(eventEnd).getDate()}` : '';
-  let eventEndTime = eventEnd ? `${(new Date(eventEnd).getHours()).toString().padStart(2, '0')}:${(new Date(eventEnd).getMinutes()).toString().padStart(2, '0')}` : '';
-  let sheetOpenDate =  sheetOpen ? `${new Date(sheetOpen).getFullYear()}-${new Date(sheetOpen).getMonth() + 1}-${new Date(sheetOpen).getDate()}` : '';
-  let sheetOpenTime = sheetOpen ? `${(new Date(sheetOpen).getHours()).toString().padStart(2, '0')}:${(new Date(sheetOpen).getMinutes()).toString().padStart(2, '0')}` : '';
-  let sheetClosedDate = sheetClosed ? `${new Date(sheetClosed).getFullYear()}-${new Date(sheetClosed).getMonth() + 1}-${new Date(sheetClosed).getDate()}` : '';
-  let sheetClosedTime = sheetClosed ? `${(new Date(sheetClosed).getHours()).toString().padStart(2, '0')}:${(new Date(sheetClosed).getMinutes()).toString().padStart(2, '0')}` : '';
+  let eventStartDate = eventStart ? format(new Date(eventStart), DATE_FORMAT): ''
+  let eventStartTime = eventStart ? format(new Date(eventStart), TIME_FORMAT) : ''
+
+  let eventEndDate = eventEnd ? format(new Date(eventEnd), DATE_FORMAT) : ''
+  let eventEndTime = eventEnd ? format(new Date(eventEnd), TIME_FORMAT) : ''
+
+  let sheetOpenDate = sheetOpen ? format(new Date(sheetOpen), DATE_FORMAT) : ''
+  let sheetOpenTime = sheetOpen ? format(new Date(sheetOpen), TIME_FORMAT) : ''
+
+  let sheetClosedDate = sheetClosed ? format(new Date(sheetClosed), DATE_FORMAT) : ''
+  let sheetClosedTime = sheetClosed ? format(new Date(sheetClosed), TIME_FORMAT) : ''
 
   const dispatch = createEventDispatcher()
 

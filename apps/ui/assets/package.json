@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bulma": "^0.9.0",
     "bulmaswatch": "^0.8.1",
+    "date-fns": "^2.15.0",
     "jwt-decode": "^2.2.0",
     "phoenix": "file:../../../deps/phoenix",
     "phoenix_html": "file:../../../deps/phoenix_html",
