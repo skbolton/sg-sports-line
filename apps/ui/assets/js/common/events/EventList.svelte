@@ -6,7 +6,7 @@
   const dispatch = createEventDispatcher()
 </script>
 
-<div class="columns">
+<div class="columns is-multiline">
   {#each events as event}
     <div class="column is-half-desktop">
       <EventListItem on:click={() => dispatch('eventClicked', event)} event={event}/>
