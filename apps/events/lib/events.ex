@@ -39,14 +39,28 @@ defmodule Events do
 
   def create_event(_not_admin), do: {:error, :not_admin}
 
-  def add_athlete_to_event(%{event_id: event_id, athlete_id: athlete_id} = params) do
+  def update_event(%{auth: %Claims{admin: true}} = params) do
+    case Repo.get(Event, params.id) do
+      %Event{} = event ->
+        Event.new_event_changeset(event, params)
+        |> Repo.update()
+
+      nil ->
+        {:error, :not_found}
+    end
+  end
+
+  def add_athlete_to_event(
+        %{auth: %Claims{admin: true}, event_id: event_id, athlete_id: athlete_id} = params
+      ) do
     athlete_task = Task.async(fn -> Repo.get(Athlete, athlete_id) end)
     event_task = Task.async(fn -> Repo.get(Event, event_id) end)
 
-    with %Event{} <- Task.await(event_task),
-         %Athlete{} <- Task.await(athlete_task) do
-      EventAthlete.new_event_athlete_changeset(%EventAthlete{}, params)
-      |> Repo.insert()
+    with %Event{} = event <- Task.await(event_task),
+         %Athlete{} <- Task.await(athlete_task),
+         {:ok, %EventAthlete{}} <-
+           Repo.insert(EventAthlete.new_event_athlete_changeset(%EventAthlete{}, params)) do
+      {:ok, event}
     end
   end
 end

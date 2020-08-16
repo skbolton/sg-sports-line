@@ -22,4 +22,16 @@ defmodule UIWeb.Graph.Schema.Resolvers.Event do
         {:ok, event}
     end
   end
+
+  def update(args, %{context: context}) do
+    args
+    |> Map.put(:auth, context[:current_user])
+    |> Events.update_event()
+  end
+
+  def add_athlete(args, %{context: context}) do
+    args
+    |> Map.put(:auth, context[:current_user])
+    |> Events.add_athlete_to_event()
+  end
 end

@@ -1,14 +1,17 @@
 <script>
   import api from '@api'
+  import Event from '../../models/events/event'
   import Navbar from '@common/Nav.svelte'
   import EventTabBar from './EventTabBar.svelte'
   import EventDetail from './EventDetail.svelte'
+  import EventAthletes from './EventAthletes.svelte'
   export let id
   export let page 
 
   const eventQuery = `
     query eventById($id: ID!) {
       event(id: $id) {
+        id
         name
         eventStart
         eventEnd
@@ -20,7 +23,7 @@
     }
   `
 
-  const event = api.graph(eventQuery, { id }).then(({ event }) => event)
+  const event = api.graph(eventQuery, { id }).then(({ event }) => new Event(event))
 
 </script>
 
@@ -42,6 +45,8 @@
       <EventTabBar id={id} page={page}></EventTabBar>
       {#if page === 'details'}
         <EventDetail event={event}/>
+      {:else if page === 'athletes'}
+        <EventAthletes event={event}/>
       {/if}
   {/await}
 </div>
