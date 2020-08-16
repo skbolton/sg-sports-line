@@ -2,6 +2,7 @@ defmodule Events.Event do
   use Ecto.Schema
   import Ecto.Changeset
   alias Athletes.Athlete
+  alias Ecto.Changeset
   alias Events.EventAthlete
 
   @derive Jason.Encoder
@@ -36,5 +37,20 @@ defmodule Events.Event do
       :sheet_open,
       :sheet_closed
     ])
+    |> check_date_is_before(:event_start, :event_end)
+    |> check_date_is_before(:sheet_open, :sheet_closed)
+  end
+
+  @spec check_date_is_before(%Ecto.Changeset{}, atom(), atom()) :: %Ecto.Changeset{}
+  defp check_date_is_before(%Changeset{} = changeset, earlier, later) do
+    earlier_value = get_field(changeset, earlier)
+    later_value = get_field(changeset, later)
+
+    if earlier_value != nil and later_value != nil and
+         DateTime.compare(earlier_value, later_value) == :lt do
+      changeset
+    else
+      add_error(changeset, earlier, "#{earlier} should be before #{later}")
+    end
   end
 end
