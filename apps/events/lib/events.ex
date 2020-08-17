@@ -5,7 +5,7 @@ defmodule Events do
 
   import Ecto.Query
   alias DB.Repo
-  alias Accounts.Authentication.Claims
+  alias Accounts.Authentication.{Claims, InvalidPermission}
 
   alias Events.{
     Event,
@@ -25,7 +25,7 @@ defmodule Events do
     {:ok, Repo.all(Event)}
   end
 
-  def all(_not_admin), do: {:error, :not_admin}
+  def all(_not_admin), do: {:error, InvalidPermission.new("view:all_events")}
 
   def active do
     now = DateTime.utc_now()
@@ -37,7 +37,7 @@ defmodule Events do
     |> Repo.insert()
   end
 
-  def create_event(_not_admin), do: {:error, :not_admin}
+  def create_event(_not_admin), do: {:error, InvalidPermission.new("create:event")}
 
   def update_event(%{auth: %Claims{admin: true}} = params) do
     case Repo.get(Event, params.id) do
@@ -62,5 +62,9 @@ defmodule Events do
            Repo.insert(EventAthlete.new_event_athlete_changeset(%EventAthlete{}, params)) do
       {:ok, event}
     end
+  end
+
+  def add_athlete_to_event(_non_admin) do
+    {:error, InvalidPermission.new("create:event_athlete")}
   end
 end
