@@ -1,36 +1,25 @@
 <script>
   import { navigate } from 'svelte-routing'
-  import api from '@api'
-  import decodeJwt from 'jwt-decode'
-  import adminStore from '@stores/admin'
-  import tokenStore from '@stores/token'
+  import { onMount } from 'svelte'
+  import authStore from '@stores/auth'
 
   let email = ""
   let password = ""
 
   $: submittable = email.length > 0 && password.length > 0
 
-  const loginQuery = `
-    mutation requestAuthToken($email: String! $password: String!) {
-      requestAuthToken(email: $email password: $password) {
-        token
-      }
+  onMount(() => {
+    if ($authStore.token) {
+      navigate("/admin")
     }
-  `
+  })
 
   const login = () => {
     if (!submittable) {
       return
     }
 
-    api.graph(loginQuery, { email: email, password: password })
-      .then(({ requestAuthToken }) => {
-        const { token } = requestAuthToken
-        const {admin = false} = decodeJwt(token)
-        adminStore.storeAdmin(admin)
-        tokenStore.token = token
-        navigate('/admin/')
-      })
+    authStore.login(email, password)
   }
 
 </script>
@@ -67,7 +56,7 @@
       </div>
       <div class="field mb-5">
         <div class="control">
-          <input type="submit" disabled={!submittable} value="Log in" class="button is-primary">
+          <button type="submit" disabled={!submittable} class:is-loading={$authStore.loading} class="button is-primary">Log in</button>
         </div>
       </div>
     </form>
