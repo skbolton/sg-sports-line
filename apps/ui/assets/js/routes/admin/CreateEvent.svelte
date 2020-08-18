@@ -9,7 +9,10 @@
   const createEventMutation = `
     mutation createEvent($name: String! $eventStart: DateTime! $eventEnd: DateTime! $sheetOpen: DateTime! $sheetClosed: DateTime!) {
       createEvent(name: $name eventStart: $eventStart eventEnd: $eventEnd sheetOpen: $sheetOpen sheetClosed: $sheetClosed) {
-        id
+        __typename
+        ... on Event {
+          id
+        }
       }
     }
   `

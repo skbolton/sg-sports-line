@@ -1,4 +1,7 @@
 defmodule UIWeb.Graph.Schema.Resolvers.Event do
+  alias Accounts.Authentication.InvalidPermission
+  alias UIWeb.Graph.Schema.Utils.InvalidParams
+
   def active(_args, _context) do
     {:ok, Events.active()}
   end
@@ -11,6 +14,16 @@ defmodule UIWeb.Graph.Schema.Resolvers.Event do
     args
     |> Map.put(:auth, context[:current_user])
     |> Events.create_event()
+    |> case do
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:ok, InvalidParams.new(changeset)}
+
+      {:error, %InvalidPermission{}} = invalid_perm ->
+        invalid_perm
+
+      {:ok, _event} = success ->
+        success
+    end
   end
 
   def by_id(%{id: id}, _context) do
