@@ -20,7 +20,7 @@ defmodule UIWeb.Graph.Schema.Utils.InvalidParams do
   """
   def new(%Changeset{valid?: false, errors: errors}) do
     errors
-    |> Enum.reduce(%__MODULE__{}, fn {field, error}, invalid_params ->
+    |> Enum.reduce(%__MODULE__{}, fn {field, {error, _}}, invalid_params ->
       %__MODULE__{
         invalid_params
         | fields: [field | invalid_params.fields],
