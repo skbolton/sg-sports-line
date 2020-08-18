@@ -4,4 +4,4 @@ config :db, DB.Repo,
   database: "sg-sports-line-test",
   username: "postgres",
   password: "postgres",
-  hostname: "localhost"
+  hostname: System.get_env("DB_HOST", "localhost")
