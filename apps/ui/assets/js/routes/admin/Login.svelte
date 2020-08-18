@@ -2,11 +2,15 @@
   import { navigate } from 'svelte-routing'
   import { onMount } from 'svelte'
   import authStore from '@stores/auth'
+  import Login from '../../models/login'
 
-  let email = ""
-  let password = ""
+  let login = new Login({email: "", password: ""})
 
-  $: submittable = email.length > 0 && password.length > 0
+  $: submittable = login.validate().valid
+
+  $: if ($authStore.token) {
+      navigate("/admin")
+  }
 
   onMount(() => {
     if ($authStore.token) {
@@ -14,12 +18,12 @@
     }
   })
 
-  const login = () => {
+  const submit = () => {
     if (!submittable) {
       return
     }
 
-    authStore.login(email, password)
+    authStore.login(login.email, login.password)
   }
 
 </script>
@@ -34,12 +38,12 @@
 
 <section class="hero is-fullheight">
   <div class="hero-body aic jcc">
-    <form class="box" on:submit|preventDefault={login}>
+    <form class="box" on:submit|preventDefault={submit}>
       <h1 class="title">Admin Panel</h1>
       <div class="field mb-5">
         <label class="label">Email</label>
         <div class="control has-icons-left">
-          <input autofocus class="input" type="text" bind:value={email} placeholder="Email" on:keypress={event => email = event.target.value}>
+          <input autofocus class="input" type="text" bind:value={login.email} placeholder="Email" on:keypress={({ target }) => login.email = target.value}>
           <span class="icon is-small is-left">
             <i class="ri-user-fill"></i>
           </span>
@@ -48,7 +52,7 @@
       <div class="field mb-5">
         <label class="label">Password</label>
         <div class="control has-icons-left">
-          <input class="input" type="password" bind:value={password} placeholder="Password" on:keypress={event => password = event.target.value}>
+          <input class="input" type="password" bind:value={login.password} placeholder="Password" on:keypress={({ target }) => login.password = target.value}>
           <span class="icon is-small is-left">
             <i class="ri-lock-fill"></i>
           </span>
