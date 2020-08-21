@@ -38,4 +38,8 @@ defmodule Athletes do
     # What do you do to check the input
     Repo.all(from(a in Athlete, where: like(fragment("lower(?)", a.name), ^search_string)))
   end
+
+  def by_id(id) do
+    Repo.get(Athlete, id)
+  end
 end

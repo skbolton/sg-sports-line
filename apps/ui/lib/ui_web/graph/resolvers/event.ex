@@ -1,5 +1,6 @@
 defmodule UIWeb.Graph.Schema.Resolvers.Event do
   alias Accounts.Authentication.InvalidPermission
+  alias Events.Event
   alias UIWeb.Graph.Schema.Utils.InvalidParams
 
   def active(_args, _context) do
@@ -8,6 +9,10 @@ defmodule UIWeb.Graph.Schema.Resolvers.Event do
 
   def all(_args, %{context: context}) do
     Events.all(%{auth: context[:current_user]})
+  end
+
+  def event_athletes(%Event{id: id}, _args, _resolution) do
+    {:ok, Events.athletes_for_event(id)}
   end
 
   def create_event(args, %{context: context}) do

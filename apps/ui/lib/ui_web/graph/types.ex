@@ -5,5 +5,6 @@ defmodule UIWeb.Graph.Schema.Types do
   import_types Types.Event
   import_types Types.User
   import_types Types.Athlete
+  import_types Types.EventAthlete
   import_types Types.Error
 end

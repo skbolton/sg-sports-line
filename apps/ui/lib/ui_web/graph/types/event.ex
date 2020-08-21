@@ -1,5 +1,7 @@
 defmodule UIWeb.Graph.Schema.Types.Event do
   use Absinthe.Schema.Notation
+  alias UIWeb.Graph.Schema.Resolvers.Event
+
   import_types Absinthe.Type.Custom
 
   object :event do
@@ -17,5 +19,9 @@ defmodule UIWeb.Graph.Schema.Types.Event do
     field :sheet_cost, non_null(:integer)
     @desc "How much funds are give for each sheet"
     field :funds_granted, non_null(:integer)
+    @desc "athletes cost and winnings in the event"
+    field :event_athletes, list_of(:event_athlete) do
+      resolve &Event.event_athletes/3
+    end
   end
 end

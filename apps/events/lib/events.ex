@@ -27,6 +27,12 @@ defmodule Events do
 
   def all(_not_admin), do: {:error, InvalidPermission.new("view:all_events")}
 
+  def athletes_for_event(event_id) do
+    query = from(ea in EventAthlete, where: ea.event_id == ^event_id)
+
+    Repo.all(query)
+  end
+
   def active do
     now = DateTime.utc_now()
     Repo.all(from e in Event, where: e.sheet_open < ^now, where: e.sheet_closed > ^now)
