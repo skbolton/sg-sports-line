@@ -7,6 +7,7 @@ const ATHLETES_QUERY = `
     event(id: $id) {
       eventAthletes {
         cost
+        winnings
         athlete {
           name
         }
