@@ -1,6 +1,11 @@
 <script>
+  import { onMount } from 'svelte'
   import api from '@api'
+  import eventAthletes from '@stores/eventAthletes'
+  import EventAthletesTable from './EventAthletesTable.svelte'
   export let event
+
+  onMount(() => eventAthletes.getAthletes(event.id))
 
   let searchResults = []
   let searchText = ''
@@ -34,6 +39,12 @@
     })
   }
 </script>
+
+{#if $eventAthletes.eventAthletes.length}
+  <EventAthletesTable eventAthletes={$eventAthletes.eventAthletes}/>
+{:else}
+  This event has no athletes yet
+{/if}
 
 <form on:submit|preventDefault>
   <div class="field">
