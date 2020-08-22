@@ -6,7 +6,7 @@ defmodule Events.EventAthlete do
 
   schema "events_athletes" do
     field :cost, :integer
-    field :winnings, :integer
+    field :winnings, :integer, default: 0
     belongs_to :event, Event
     belongs_to :athlete, Athlete
     timestamps()
