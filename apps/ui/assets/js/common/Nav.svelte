@@ -1,8 +1,7 @@
 <script>
+  import { url } from '@sveltech/routify'
   import Logo from '@common/Logo.svelte'
-  import {navigate} from 'svelte-routing'
 
-  export let url = ''
 </script>
 
 <style>
@@ -11,8 +10,8 @@
   }
 </style>
 
-<nav class="navbar">
+<nav class="navbar is-dark">
   <section class="navbar-brand has-text-white">
-    <div class="navbar-item" on:click={() => navigate(url)}><Logo/></div>
+    <a class="navbar-item" href={$url("/")}><Logo/></a>
   </section>
 </nav>
