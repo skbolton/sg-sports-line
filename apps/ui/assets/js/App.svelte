@@ -1,12 +1,7 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing"
-  import Admin from "./routes/admin/Admin.svelte"
-  import Accounts from "./routes/accounts/Accounts.svelte"
-
-  let url = ""
+  import { Router } from "@sveltech/routify"
+  import { routes } from "@sveltech/routify/tmp/routes"
 </script>
 
-<Router url="{url}">
-  <Route path="admin/*"component="{Admin}"/>
-  <Route path="accounts/*"component="{Accounts}"/>
-</Router>
+<Router {routes} />
+

@@ -3,8 +3,12 @@
   "description": " ",
   "license": "MIT",
   "scripts": {
-    "deploy": "webpack --mode production",
+    "routify": "routify",
+    "deploy": "routify -b && webpack --mode production",
     "watch": "webpack --mode development --watch"
+  },
+  "routify": {
+    "pages": "./js/pages"
   },
   "dependencies": {
     "axios": "^0.19.2",

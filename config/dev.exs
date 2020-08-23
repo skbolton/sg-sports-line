@@ -24,6 +24,11 @@ config :ui, UIWeb.Endpoint,
       "development",
       "--watch-stdin",
       cd: Path.expand("../apps/ui/assets", __DIR__)
+    ],
+    npm: [
+      "run",
+      "routify",
+      cd: Path.expand("../apps/ui/assets", __DIR__)
     ]
   ]
 

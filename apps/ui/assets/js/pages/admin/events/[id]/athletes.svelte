@@ -3,10 +3,11 @@
   import api from '@api'
   import eventAthletes from '@stores/eventAthletes'
   import athleteSearch from '@stores/athleteSearch'
-  import EventAthletesTable from './EventAthletesTable.svelte'
+  import EventAthletesTable from './_EventAthletesTable.svelte'
+  export let scoped
 
   // properties
-  export let event
+  let event = scoped.event
 
   // hooks
   onMount(() => eventAthletes.getAthletes(event.id))
