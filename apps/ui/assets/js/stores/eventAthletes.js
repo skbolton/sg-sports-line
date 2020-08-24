@@ -59,6 +59,10 @@ const REMOVE_ATHLETE_QUERY = `
           name
         }
       }
+      availableAthletes {
+        name
+        id
+      }
     }
   }
 `
@@ -115,7 +119,7 @@ const createEventAthleteStore = () => {
     removeAthlete({ id }) {
       return api.graph(REMOVE_ATHLETE_QUERY, { id })
         .then(({ removeEventAthlete }) => removeEventAthlete)
-        .then(({ eventAthletes }) => update(store => ({ ...store, eventAthletes })))
+        .then(({ eventAthletes, availableAthletes }) => update(store => ({ ...store, eventAthletes, availableAthletes })))
     }
   }
 }
