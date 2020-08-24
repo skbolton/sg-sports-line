@@ -48,6 +48,6 @@
       <EventList events={events} on:eventClicked={goToEvent} />
   {/await}
 </div>
-<a href={$url('./create')}>
+<a href={$url('/admin/events/create')}>
   <button class="button is-primary is-size-4">+</button>
 </a>

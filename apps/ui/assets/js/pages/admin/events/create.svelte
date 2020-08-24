@@ -1,7 +1,8 @@
 <script>
-  import {navigate} from 'svelte-routing'
-  import Event from '../../models/events/event.js'
-  import api from '../../api'
+  import { goto } from '@sveltech/routify'
+  /* import Event from './models/events/event.js' */
+  import Event from '../../../models/events/event.js'
+  import api from '@api'
   import EventForm from '@common/events/EventForm.svelte'
 
   const event = new Event({ name: '' })
@@ -20,7 +21,7 @@
   const create = ({ detail }) =>
     api.graph(createEventMutation, detail.toJSON())
       .then(console.log)
-      .then(() => navigate("/admin"))
+      .then(() => $goto("/admin/"))
 
 </script>
 
@@ -35,7 +36,7 @@
 <section class="hero is-fullheight">
   <div class="hero-body aic jcc">
     <div class="container">
-      <EventForm event={event} titleText="New Event" confirmButtonText="Create" on:eventSubmitted={create} on:eventCancelled={() => navigate("/admin")}/>
+      <EventForm event={event} titleText="New Event" confirmButtonText="Create" on:eventSubmitted={create} on:eventCancelled={() => $goto("/admin/")}/>
     </div>
   </div>
 </section>
