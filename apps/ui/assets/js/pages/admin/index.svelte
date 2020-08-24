@@ -31,23 +31,27 @@
     max-width: 1000px;
     margin: 0 auto;
   }
-
-  button {
-    position: absolute;
-    bottom: 32px;
-    right: 32px;
-    border-radius: 50%;
-  }
 </style>
 
 <div class="event-container">
-  <h1 class="title">Events</h1>
+  <div class="level">
+    <div class="level-left">
+      <div class="level-item">
+        <h1 class="title">Events</h1>
+      </div>
+    </div>
+    <div class="level-right">
+      <div class="level-item">
+        <a href={$url("/admin/events/create")} class="button is-link">
+          <i class="ri-flag-line"></i>&nbsp;
+          New Event
+        </a>
+      </div>
+    </div>
+  </div>
   {#await allEvents}
     Loading...
     {:then events}
       <EventList events={events} on:eventClicked={goToEvent} />
   {/await}
 </div>
-<a href={$url('/admin/events/create')}>
-  <button class="button is-primary is-size-4">+</button>
-</a>
