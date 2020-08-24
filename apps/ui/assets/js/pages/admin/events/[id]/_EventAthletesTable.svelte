@@ -82,10 +82,54 @@
 <table class="table is-fullwidth is-hoverable is-bordered">
   <thead>
     <tr>
-      <th on:click={() => changeSort('id')}>Id</th>
-      <th on:click={() => changeSort('name')}>Name</th>
-      <th on:click={() => changeSort('cost')}>Cost</th>
-      <th on:click={() => changeSort('winnings')}>Winnings</th>
+      <th on:click={() => changeSort('id')}>
+        Id
+        <span class="icon has-text-link">
+          {#if sortBy === 'id'}
+            {#if direction === 'asc'}
+              <i class="ri-arrow-down-line"></i>
+            {:else}
+              <i class="ri-arrow-up-line"></i>
+            {/if}
+          {/if}
+        </span>
+      </th>
+      <th on:click={() => changeSort('name')}>
+        Name
+        <span class="icon has-text-link">
+          {#if sortBy === 'name'}
+            {#if direction === 'asc'}
+              <i class="ri-arrow-down-line"></i>
+            {:else}
+              <i class="ri-arrow-up-line"></i>
+            {/if}
+          {/if}
+        </span>
+      </th>
+      <th on:click={() => changeSort('cost')}>
+        Cost
+        <span class="icon has-text-link">
+          {#if sortBy === 'cost'}
+            {#if direction === 'asc'}
+              <i class="ri-arrow-down-line"></i>
+            {:else}
+              <i class="ri-arrow-up-line"></i>
+            {/if}
+          {/if}
+        </span>
+      </th>
+      <th on:click={() => changeSort('winnings')}>
+        Winnings
+        <span class="icon has-text-link">
+          {#if sortBy === 'winnings'}
+            {#if direction === 'asc'}
+              <i class="ri-arrow-down-line"></i>
+            {:else}
+              <i class="ri-arrow-up-line"></i>
+            {/if}
+          {/if}
+        </span>
+      </th>
     </tr>
   </thead>
   <tbody>
