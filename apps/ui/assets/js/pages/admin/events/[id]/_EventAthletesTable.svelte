@@ -7,7 +7,7 @@
 
   let sortBy = "name"
   let direction = "asc"
-  let sortedAthletes = eventAthletes.slice()
+  $: sortedAthletes = eventAthletes.slice()
   let selectedAthlete = null
   let editedCost = null
   let editedWinnings = null
