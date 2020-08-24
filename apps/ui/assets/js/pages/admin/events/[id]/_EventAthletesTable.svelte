@@ -39,7 +39,13 @@
   }
 
   const onPendingAthleteSave = pendingAthlete => {
-    dispatch('pendingAthleteSaved', pendingAthlete)
+    dispatch(
+      'pendingAthleteSaved',
+      {
+        id: pendingAthlete.id,
+        cost: parseInt(pendingAthlete.cost)
+      }
+    )
   }
 
 </script>
@@ -100,6 +106,13 @@
     {#each pendingAthletes as pending}
       <tr class="has-background-light">
         <td>
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary" on:click={() => onPendingAthleteSave(pending)}>Add</button>
+            </div>
+          </div>
+        </td>
+        <td>
           {pending.name}
         </td>
         <td>
@@ -110,11 +123,7 @@
           </div>
         </td>
         <td>
-          <div class="field">
-            <div class="control">
-              <button class="button is-primary" on:click={() => onPendingAthleteSave(pending)}>Add</button>
-            </div>
-          </div>
+          N/A
         </td>
       </tr>
     {/each}
