@@ -8,7 +8,7 @@
   }
 </script>
 
-<div class="tabs is-boxed">
+<div class="tabs">
   <ul>
     <li class:is-active={page === "details"}>
       <a on:click={goTo("details")}>
