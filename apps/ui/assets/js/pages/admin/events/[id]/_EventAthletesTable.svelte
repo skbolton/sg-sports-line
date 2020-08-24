@@ -5,6 +5,9 @@
 
   const dispatch = createEventDispatcher()
 
+  let sortBy = "name"
+  let direction = "asc"
+  let sortedAthletes = eventAthletes.slice()
   let selectedAthlete = null
   let editedCost = null
   let editedWinnings = null
@@ -15,8 +18,25 @@
     editedWinnings = athlete.winnings
   }
 
+  $: if (sortBy === "name") {
+    sortedAthletes = sortedAthletes.sort((a, b) => direction === "asc" ? a.athlete.name > b.athlete.name : a.athlete.name < b.athlete.name)
+
+   } else {
+     sortedAthletes = sortedAthletes.sort((a, b) => direction === "asc" ? a[sortBy] > b[sortBy] : a[sortBy] < b[sortBy])
+  }
+
   $: changes = (selectedAthlete
     && (selectedAthlete.cost !== editedCost || selectedAthlete.winnings !== editedWinnings))
+
+  const changeSort = header => {
+    if (sortBy === header) {
+      direction = direction === "asc" ? "desc" : "asc"
+      return
+    }
+
+    sortBy = header
+    direction = "asc"
+  }
 
   const onCancel = () => {
     selectedAthlete = null
@@ -62,14 +82,14 @@
 <table class="table is-fullwidth is-hoverable is-bordered">
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Cost</th>
-      <th>Winnings</th>
+      <th on:click={() => changeSort('id')}>Id</th>
+      <th on:click={() => changeSort('name')}>Name</th>
+      <th on:click={() => changeSort('cost')}>Cost</th>
+      <th on:click={() => changeSort('winnings')}>Winnings</th>
     </tr>
   </thead>
   <tbody>
-    {#each eventAthletes as ea}
+    {#each sortedAthletes as ea}
       {#if selectedAthlete && ea.id === selectedAthlete.id}
         <tr>
           <td>
