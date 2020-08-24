@@ -36,9 +36,10 @@ defmodule Events do
   def available_athletes(event_id) do
     query =
       from(a in Athlete,
-        left_join: ea in EventAthlete,
-        on: a.id == ea.athlete_id,
-        where: ea.event_id != ^event_id
+        where:
+          a.id not in subquery(
+            from(ea in EventAthlete, where: ea.event_id == ^event_id, select: ea.athlete_id)
+          )
       )
 
     Repo.all(query)
