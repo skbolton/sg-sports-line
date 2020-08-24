@@ -26,7 +26,15 @@
 
   const onEventAthleteSave = () => {
     if (changes) {
-      dispatch('eventAthleteChanged', {id: selectedAthlete.id, cost: editedCost, winnings: editedWinnings})
+      dispatch(
+        'eventAthleteChanged',
+        {
+          id: selectedAthlete.id,
+          cost: parseInt(editedCost),
+          winnings: parseInt(editedWinnings)
+        }
+      )
+      onCancel()
     }
   }
 

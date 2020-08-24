@@ -36,6 +36,14 @@ const ADD_ATHELETE_QUERY = `
   }
 `
 
+const UPDATE_ATHLETE_QUERY = `
+ mutation updateEventAthlete($id: ID!, $cost: Int!, $winnings: Int!) {
+   updateEventAthlete(id: $id, cost: $cost, winnings: $winnings) {
+     id
+   }
+ }
+`
+
 const createEventAthleteStore = () => {
   const { subscribe, update} = writable({loading: false, eventAthletes: [], availableAthletes: [], pendingAthletes: []})
 
@@ -66,6 +74,15 @@ const createEventAthleteStore = () => {
           pendingAthletes
         }
       })
+    },
+    updateAthlete({ id, cost, winnings }) {
+      return api.graph(UPDATE_ATHLETE_QUERY, { id, cost, winnings })
+        .then(() =>
+          update(store => ({
+            ...store,
+            eventAthletes: store.eventAthletes.map(athlete => athlete.id === id ? { ...athlete, cost, winnings } : athlete)
+          }))
+        )
     }
   }
 }

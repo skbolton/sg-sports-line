@@ -10,9 +10,6 @@
 
   const prom = eventAthletes.getAthletes(event.id)
 
-  // ui state
-  let searchText = ''
-
   // events
   const onAthleteSelect = ({ id, name }) => {
     athleteSearch.clearSearch()
@@ -31,7 +28,7 @@
     <EventAthletesTable
       eventAthletes={$eventAthletes.eventAthletes}
       pendingAthletes={$eventAthletes.pendingAthletes}
-      on:eventAthleteChanged={({ detail }) => console.log(detail)}
+      on:eventAthleteChanged={({ detail }) => eventAthletes.updateAthlete({ id: detail.id, cost: detail.cost, winnings: detail.cost })}
       on:pendingAthleteSaved={({ detail }) => console.log(detail)}
     />
     <hr>
