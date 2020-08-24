@@ -1,11 +1,8 @@
 <script>
   import { url } from '@sveltech/routify'
-  import Nav from '@common/Nav.svelte'
   import adminStore from '@stores/admin'
 
 </script>
-
-<Nav home="/admin"/>
 
 {#if $adminStore === "true" || $adminStore === true}
   <slot></slot>
