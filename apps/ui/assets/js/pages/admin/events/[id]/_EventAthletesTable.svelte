@@ -46,7 +46,6 @@
 
   const onEventAthleteSave = () => {
     if (changes) {
-      console.log(parseFloat(editedCost))
       dispatch(
         'eventAthleteChanged',
         {
