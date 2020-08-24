@@ -39,15 +39,15 @@
         </div>
       </div>
     </div>
-    <ul>
+    <div class="columns is-multiline is-gapless">
       {#each availableAthletes as athlete}
-        <li>
+        <div class="column is-4">
           <label class="label">
             <input class="checkbox mr-2" type="checkbox" checked={selectedAthletes.includes(athlete)} on:change={() => toggleSelectAthelte(athlete)}>
             {athlete.name}
           </label>
-        </li>
+        </div>
       {/each}
-    </ul>
+    </div>
   </div>
 </div>
