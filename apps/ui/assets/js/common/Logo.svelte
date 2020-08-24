@@ -12,5 +12,5 @@
 </style>
 
 <img src={logo} alt="sg-sports-line-logo">
-<span class="is-size-5">SG Sports Line</span>
+<span class="is-size-5 has-text-white">SG Sports Line</span>
 
