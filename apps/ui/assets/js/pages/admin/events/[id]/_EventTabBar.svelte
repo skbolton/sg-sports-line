@@ -5,7 +5,7 @@
 
 </script>
 
-<div class="tabs is-boxed">
+<div class="tabs">
   <ul>
     <li class:is-active={$isActive('./details')}>
       <a href={$url('./details')}>
