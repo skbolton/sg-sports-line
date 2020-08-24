@@ -2,6 +2,7 @@
   import api from '@api'
   import CreateAthlete from '@common/CreateAthlete.svelte'
   import eventAthletes from '@stores/eventAthletes'
+  import athlete from '@stores/athlete'
   import EventAthletesTable from './_EventAthletesTable.svelte'
   import AvailableAthletesTable from './_AvailableAthletesTable.svelte'
   export let scoped
@@ -22,6 +23,12 @@
     const { selectedAthletes = [] } = detail
     selectedAthletes.forEach(eventAthletes.selectAthleteToAdd)
   }
+
+  const athleteCreated = ({ detail }) => {
+    // we now have a new athlete we can go and fetch
+    athlete.createAthlete(detail.name)
+      .then(() => eventAthletes.getAthletes(event.id))
+  }
 </script>
 
 {#await prom}
@@ -39,7 +46,7 @@
       on:selectedAthletesSubmitted={availableAthletesSelected}
     />
 
-    <CreateAthlete on:athleteCreate={console.log}/>
+    <CreateAthlete on:athleteCreate={athleteCreated}/>
 {/await}
 
 
