@@ -7,13 +7,7 @@
 
 </script>
 
-<style>
-  nav {
-    margin-bottom: 24px;
-  }
-</style>
-
-<nav class="navbar">
+<nav class="navbar mb-6">
   <section class="navbar-brand has-text-white">
     <a class="navbar-item" href={$url(home)}><Logo/></a>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" on:click={() => open = !open}>

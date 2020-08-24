@@ -37,10 +37,6 @@
   }
 </style>
 
-<section class="hero is-fullheight">
-  <div class="hero-body aic jcc">
-    <div class="container">
-      <EventForm event={event} titleText="New Event" confirmButtonText="Create" on:eventSubmitted={create} on:eventCancelled={() => $goto("/admin/")}/>
-    </div>
-  </div>
-</section>
+<div class="container">
+  <EventForm event={event} titleText="New Event" confirmButtonText="Create" on:eventSubmitted={create} on:eventCancelled={() => $goto("/admin/")}/>
+</div>
