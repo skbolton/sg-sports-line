@@ -17,4 +17,10 @@ defmodule Events.EventAthlete do
     |> cast(params, [:cost, :event_id, :athlete_id])
     |> validate_required([:cost, :event_id, :athlete_id])
   end
+
+  def update_changeset(event_athlete, params) do
+    event_athlete
+    |> cast(params, [:cost, :winnings])
+    |> validate_required([:cost, :winnings])
+  end
 end

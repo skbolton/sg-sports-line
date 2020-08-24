@@ -84,4 +84,15 @@ defmodule Events do
   def add_athlete_to_event(_non_admin) do
     {:error, InvalidPermission.new("create:event_athlete")}
   end
+
+  def update_event_athlete(%{auth: %Claims{admin: true}, id: id} = params) do
+    case Repo.get(EventAthlete, id) do
+      %EventAthlete{} = ea ->
+        EventAthlete.update_changeset(ea, params)
+        |> Repo.update()
+
+      nil ->
+        {:error, :not_found}
+    end
+  end
 end
