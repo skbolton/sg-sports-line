@@ -22,7 +22,7 @@
     sortedAthletes = sortedAthletes.sort((a, b) => direction === "asc" ? a.athlete.name > b.athlete.name : a.athlete.name < b.athlete.name)
 
    } else {
-     sortedAthletes = sortedAthletes.sort((a, b) => direction === "asc" ? a[sortBy] > b[sortBy] : a[sortBy] < b[sortBy])
+     sortedAthletes = sortedAthletes.sort((a, b) => direction === "asc" ? parseFloat(a[sortBy]) > parseFloat(b[sortBy]) : parseFloat(a[sortBy]) < parseFloat(b[sortBy]))
   }
 
   $: changes = (selectedAthlete
@@ -173,7 +173,7 @@
         <tr on:click={() => selectAthlete(ea)}>
           <td>{ea.id}</td>
           <td>{ea.athlete.name}</td>
-          <td>{ea.cost}</td>
+          <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(ea.cost)}</td>
           <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(ea.winnings)}</td>
         </tr>
       {/if}
