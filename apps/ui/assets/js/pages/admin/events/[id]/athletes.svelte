@@ -1,5 +1,6 @@
 <script>
   import api from '@api'
+  import CreateAthlete from '@common/CreateAthlete.svelte'
   import eventAthletes from '@stores/eventAthletes'
   import EventAthletesTable from './_EventAthletesTable.svelte'
   import AvailableAthletesTable from './_AvailableAthletesTable.svelte'
@@ -37,6 +38,8 @@
       availableAthletes={$eventAthletes.availableAthletes}
       on:selectedAthletesSubmitted={availableAthletesSelected}
     />
+
+    <CreateAthlete on:athleteCreate={console.log}/>
 {/await}
 
 
