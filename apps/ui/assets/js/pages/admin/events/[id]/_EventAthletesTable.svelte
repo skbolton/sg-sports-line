@@ -174,7 +174,7 @@
           <td>{ea.id}</td>
           <td>{ea.athlete.name}</td>
           <td>{ea.cost}</td>
-          <td>{ea.winnings}</td>
+          <td>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(ea.winnings)}</td>
         </tr>
       {/if}
     {/each}
