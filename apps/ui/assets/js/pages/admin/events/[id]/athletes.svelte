@@ -36,7 +36,7 @@
     <EventAthletesTable
       eventAthletes={$eventAthletes.eventAthletes}
       pendingAthletes={$eventAthletes.pendingAthletes}
-      on:eventAthleteChanged={({ detail }) => eventAthletes.updateAthlete({ id: detail.id, cost: detail.cost, winnings: detail.cost })}
+      on:eventAthleteChanged={({ detail }) => eventAthletes.updateAthlete({ id: detail.id, cost: detail.cost, winnings: detail.winnings })}
       on:pendingAthleteSaved={({ detail }) => eventAthletes.addAthlete({athleteId: detail.id, eventId: event.id, cost: detail.cost, winnings: 0})}
     />
     <hr>
