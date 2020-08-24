@@ -8,18 +8,22 @@
   const event = new Event({ name: '' })
 
   const createEventMutation = `
-    mutation createEvent($name: String! $eventStart: DateTime! $eventEnd: DateTime! $sheetOpen: DateTime! $sheetClosed: DateTime!) {
-      createEvent(name: $name eventStart: $eventStart eventEnd: $eventEnd sheetOpen: $sheetOpen sheetClosed: $sheetClosed) {
+    mutation createEvent($input: CreateEventInput) {
+      createEvent(input: $input) {
         __typename
         ... on Event {
           id
+        }
+        ... on InvalidParams {
+          fields
+          errors
         }
       }
     }
   `
 
   const create = ({ detail }) =>
-    api.graph(createEventMutation, detail.toJSON())
+    api.graph(createEventMutation, {input: detail.toJSON()})
       .then(console.log)
       .then(() => $goto("/admin/"))
 

@@ -6,6 +6,16 @@ defmodule UIWeb.Graph.Schema.Mutations.Event do
   alias UIWeb.Graph.Schema.Utils.InvalidParams
   alias UIWeb.Graph.Schema.Resolvers.Event, as: EventResolver
 
+  input_object :create_event_input do
+    field :name, non_null(:string)
+    field :event_start, non_null(:datetime)
+    field :event_end, non_null(:datetime)
+    field :sheet_open, non_null(:datetime)
+    field :sheet_closed, non_null(:datetime)
+    field :sheet_cost, :integer
+    field :funds_granted, :integer
+  end
+
   union :create_event_result do
     types [:event, :invalid_params, :invalid_permissions]
 
@@ -18,11 +28,7 @@ defmodule UIWeb.Graph.Schema.Mutations.Event do
 
   object :event_mutations do
     field :create_event, non_null(:create_event_result) do
-      arg :name, non_null(:string)
-      arg :event_start, non_null(:datetime)
-      arg :event_end, non_null(:datetime)
-      arg :sheet_open, non_null(:datetime)
-      arg :sheet_closed, non_null(:datetime)
+      arg :input, non_null(:create_event_input)
       resolve &EventResolver.create_event/2
     end
 

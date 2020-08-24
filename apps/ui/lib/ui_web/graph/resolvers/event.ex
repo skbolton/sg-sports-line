@@ -19,8 +19,8 @@ defmodule UIWeb.Graph.Schema.Resolvers.Event do
     {:ok, Events.available_athletes(id)}
   end
 
-  def create_event(args, %{context: context}) do
-    args
+  def create_event(%{input: input}, %{context: context}) do
+    input
     |> Map.put(:auth, context[:current_user])
     |> Events.create_event()
     |> case do
