@@ -10,10 +10,21 @@
   }
 </style>
 
-<div class="card" on:click>
+<div class="card">
   <section class="card-content">
     <main class="content">
-      <h1 class="title is-4">{event.name}</h1>
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <h1 class="title is-4">{event.name}</h1>
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item" on:click>
+            <span class="icon"><i class="is-size-5 ri-edit-box-line"></i></span>
+          </div>
+        </div>
+      </div>
       <p class="event-item-heading">
         Event Start
       </p>
