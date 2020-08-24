@@ -33,6 +33,17 @@ defmodule Events do
     Repo.all(query)
   end
 
+  def available_athletes(event_id) do
+    query =
+      from(a in Athlete,
+        left_join: ea in EventAthlete,
+        on: a.id == ea.athlete_id,
+        where: ea.event_id != ^event_id
+      )
+
+    Repo.all(query)
+  end
+
   def active do
     now = DateTime.utc_now()
     Repo.all(from e in Event, where: e.sheet_open < ^now, where: e.sheet_closed > ^now)

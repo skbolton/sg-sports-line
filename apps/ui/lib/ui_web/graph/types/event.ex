@@ -23,5 +23,10 @@ defmodule UIWeb.Graph.Schema.Types.Event do
     field :event_athletes, list_of(:event_athlete) do
       resolve &Event.event_athletes/3
     end
+
+    @desc "Athletes not in event but available to be added"
+    field :available_athletes, list_of(:athlete) do
+      resolve &Event.available_athletes/3
+    end
   end
 end
