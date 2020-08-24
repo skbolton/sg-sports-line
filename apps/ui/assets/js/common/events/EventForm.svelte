@@ -46,7 +46,7 @@
   <label class="label">Sheet Cost</label>
   <div class="field mb-5">
     <div class="control has-icons-left">
-      <input class="input" type="text" value={event.sheetCost} placeholder="20" on:keypress={({ target }) => event.sheetCost = target.value}>
+      <input class="input" type="text" placeholder="20" bind:value={event.sheetCost}>
       <span class="icon is-small is-left">
         <i class="ri-currency-line"></i>
       </span>
@@ -56,7 +56,7 @@
   <div class="field mb-5">
     <label class="label">Funds Granted</label>
     <div class="control has-icons-left">
-      <input class="input" type="text" value={event.fundsGranted} placeholder="100" on:keypress={({ target }) => event.fundsGranted = target.value}>
+      <input class="input" type="text" bind:value={event.fundsGranted} placeholder="100">
       <span class="icon is-small is-left">
         <i class="ri-bank-card-line"></i>
       </span>
