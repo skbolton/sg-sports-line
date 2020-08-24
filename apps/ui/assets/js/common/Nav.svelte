@@ -26,7 +26,7 @@
     <div class="navbar-start"></div>
     <div class="navbar-end">
       <div class="navbar-item">
-        <a class="has-text-white" href={$url("/admin")}>
+        <a class:has-text-white={!open} href={$url("/admin")}>
           Admin
         </a>
       </div>
