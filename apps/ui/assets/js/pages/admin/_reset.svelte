@@ -7,7 +7,7 @@
 
 <Nav home="/admin"/>
 
-{#if $adminStore === "true"}
+{#if $adminStore === "true" || $adminStore === true}
   <slot></slot>
 {:else}
   <div class="hero is-large">
