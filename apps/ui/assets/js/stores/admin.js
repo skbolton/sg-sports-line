@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-const {subscribe, set} = writable(localStorage.getItem("admin") || false)
+const {subscribe, set} = writable(localStorage.getItem("admin") || "false")
 
 const adminStore = {
   subscribe,
