@@ -1,4 +1,5 @@
 <script>
+  import { format, formatDistance } from 'date-fns'
   export let event = {}
 </script>
 
@@ -16,12 +17,17 @@
       <p class="event-item-heading">
         Event Start
       </p>
-      <p>{new Date(event.eventStart).toDateString()}
-
+      <div class="tags has-addons">
+        <span class="tag is-primary">{formatDistance(new Date(event.eventStart), new Date())}</span>
+        <span class="tag is-light">{format(new Date(event.eventStart), 'cccc - LLL do yyyy')}</span>
+      </div>
       <p class="event-item-heading">
         Event End
       </p>
-      <p>{new Date(event.eventEnd).toDateString()}
+      <div class="tags has-addons">
+        <span class="tag is-primary">{formatDistance(new Date(event.eventEnd), new Date())}</span>
+        <span class="tag is-light">{format(new Date(event.eventEnd), 'cccc - LLL do yyyy')}</span>
+      </div>
     </main>
   </section>
 </div>
