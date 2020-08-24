@@ -47,15 +47,15 @@ defmodule UIWeb.Graph.Schema.Mutations.Event do
     field :add_athlete_to_event, non_null(:event) do
       arg :event_id, non_null(:id)
       arg :athlete_id, non_null(:id)
-      arg :cost, non_null(:integer)
+      arg :cost, non_null(:float)
       resolve &EventResolver.add_athlete/2
     end
 
     field :update_event_athlete, non_null(:event_athlete) do
       @desc "The id for the event athlete"
       arg :id, non_null(:id)
-      arg :cost, non_null(:integer)
-      arg :winnings, non_null(:integer)
+      arg :cost, non_null(:float)
+      arg :winnings, non_null(:float)
       resolve &EventResolver.update_event_athlete/2
     end
 

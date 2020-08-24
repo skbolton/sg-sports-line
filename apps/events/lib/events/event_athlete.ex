@@ -5,8 +5,8 @@ defmodule Events.EventAthlete do
   alias Athletes.Athlete
 
   schema "events_athletes" do
-    field :cost, :integer
-    field :winnings, :integer, default: 0
+    field :cost, :decimal
+    field :winnings, :decimal, default: 0
     belongs_to :event, Event
     belongs_to :athlete, Athlete
     timestamps()

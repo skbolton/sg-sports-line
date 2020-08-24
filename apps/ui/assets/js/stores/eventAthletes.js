@@ -22,7 +22,7 @@ const ATHLETES_QUERY = `
 `
 
 const ADD_ATHELETE_QUERY = `
-  mutation addAthlete($eventId: ID!, $athleteId: ID!, $cost: Int!) {
+  mutation addAthlete($eventId: ID!, $athleteId: ID!, $cost: Float!) {
     addAthleteToEvent(athleteId: $athleteId, eventId: $eventId, cost: $cost) {
       eventAthletes {
         id
@@ -41,7 +41,7 @@ const ADD_ATHELETE_QUERY = `
 `
 
 const UPDATE_ATHLETE_QUERY = `
- mutation updateEventAthlete($id: ID!, $cost: Int!, $winnings: Int!) {
+ mutation updateEventAthlete($id: ID!, $cost: Float!, $winnings: Float!) {
    updateEventAthlete(id: $id, cost: $cost, winnings: $winnings) {
      id
    }

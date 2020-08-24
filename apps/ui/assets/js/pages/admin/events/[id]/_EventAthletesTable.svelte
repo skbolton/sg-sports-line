@@ -46,12 +46,13 @@
 
   const onEventAthleteSave = () => {
     if (changes) {
+      console.log(parseFloat(editedCost))
       dispatch(
         'eventAthleteChanged',
         {
           id: selectedAthlete.id,
-          cost: parseInt(editedCost),
-          winnings: parseInt(editedWinnings)
+          cost: parseFloat(editedCost),
+          winnings: parseFloat(editedWinnings)
         }
       )
       onCancel()
@@ -72,7 +73,7 @@
       'pendingAthleteSaved',
       {
         id: pendingAthlete.id,
-        cost: parseInt(pendingAthlete.cost)
+        cost: parseFloat(pendingAthlete.cost)
       }
     )
   }
