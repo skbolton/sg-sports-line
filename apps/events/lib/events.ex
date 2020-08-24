@@ -39,7 +39,8 @@ defmodule Events do
         where:
           a.id not in subquery(
             from(ea in EventAthlete, where: ea.event_id == ^event_id, select: ea.athlete_id)
-          )
+          ),
+        order_by: a.name
       )
 
     Repo.all(query)
