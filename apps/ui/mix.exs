@@ -48,7 +48,8 @@ defmodule UI.MixProject do
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.5"},
       # umbrella deps
-      {:accounts, in_umbrella: true}
+      {:accounts, in_umbrella: true},
+      {:events, in_umbrella: true}
     ]
   end
 
