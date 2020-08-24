@@ -22,7 +22,7 @@
 </script>
 
 <h2 class="title is-4">Available Athletes</h2>
-<div class="card">
+<div class="card mb-5">
   <div class="card-content">
     <div class="level">
       <div class="level-left">

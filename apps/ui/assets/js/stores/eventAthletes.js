@@ -32,6 +32,10 @@ const ADD_ATHELETE_QUERY = `
           name
         }
       }
+      availableAthletes {
+        name
+        id
+      }
     }
   }
 `
@@ -60,12 +64,21 @@ const createEventAthleteStore = () => {
       update(store => ({ ...store, loading: true }))
       return api.graph(ADD_ATHELETE_QUERY, { eventId, athleteId, cost })
         .then(({ addAthleteToEvent }) => addAthleteToEvent)
-        .then(({ eventAthletes }) => update(store => ({ ...store, eventAthletes, availableAthletes })))
+        .then(({ eventAthletes, availableAthletes }) => update(store => {
+          const pendingAthletes = store.pendingAthletes.filter(athlete => athlete.id !== athleteId)
+
+          return { 
+            ...store,
+            pendingAthletes,
+            eventAthletes,
+            availableAthletes
+          }
+        }))
         .finally(() => update(store => ({ ...store, loading: false })))
     },
     selectAthleteToAdd(athlete) {
       return update(store => {
-        const availableAthletes = store.availableAthletes.filter(available => available.id === athlete.id)
+        const availableAthletes = store.availableAthletes.filter(available => available.id !== athlete.id)
         const pendingAthletes = [...store.pendingAthletes, athlete]
 
         return {
