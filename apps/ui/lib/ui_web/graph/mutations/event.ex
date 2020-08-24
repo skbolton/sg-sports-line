@@ -52,5 +52,12 @@ defmodule UIWeb.Graph.Schema.Mutations.Event do
       arg :winnings, non_null(:integer)
       resolve &EventResolver.update_event_athlete/2
     end
+
+    field :remove_event_athlete, non_null(:event) do
+      @desc "Id for the event athlete to remove"
+      arg :id, non_null(:id)
+
+      resolve &EventResolver.remove_event_athlete/2
+    end
   end
 end

@@ -5,6 +5,7 @@ defmodule Events do
 
   import Ecto.Query
   alias DB.Repo
+  alias Ecto.Multi
   alias Accounts.Authentication.{Claims, InvalidPermission}
 
   alias Events.{
@@ -85,6 +86,39 @@ defmodule Events do
 
   def add_athlete_to_event(_non_admin) do
     {:error, InvalidPermission.new("create:event_athlete")}
+  end
+
+  def remove_athlete_from_event(%{auth: %Claims{admin: true}, id: id}) do
+    Multi.new()
+    |> Multi.run(:event_athlete, fn _repo, _args ->
+      case Repo.get(EventAthlete, id) do
+        %EventAthlete{} = ea ->
+          {:ok, ea}
+
+        nil ->
+          {:error, :not_found}
+      end
+    end)
+    |> Multi.delete(:remove_athlete, fn %{event_athlete: ea} ->
+      ea
+    end)
+    |> Multi.run(:event, fn _repo, %{event_athlete: ea} ->
+      case Repo.get(Event, ea.event_id) do
+        %Event{} = e ->
+          {:ok, e}
+
+        nil ->
+          {:error, :not_found}
+      end
+    end)
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{event: event}} ->
+        {:ok, event}
+
+      {:eror, :not_found, _, _} ->
+        {:error, "Could not find event or event athlete"}
+    end
   end
 
   def update_event_athlete(%{auth: %Claims{admin: true}, id: id} = params) do

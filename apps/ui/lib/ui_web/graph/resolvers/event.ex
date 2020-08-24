@@ -62,4 +62,10 @@ defmodule UIWeb.Graph.Schema.Resolvers.Event do
     |> Map.put(:auth, context[:current_user])
     |> Events.update_event_athlete()
   end
+
+  def remove_event_athlete(args, %{context: context}) do
+    args
+    |> Map.put(:auth, context[:current_user])
+    |> Events.remove_athlete_from_event()
+  end
 end

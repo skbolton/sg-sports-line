@@ -48,6 +48,21 @@ const UPDATE_ATHLETE_QUERY = `
  }
 `
 
+const REMOVE_ATHLETE_QUERY = `
+  mutation removeEventAthlete($id: ID!) {
+    removeEventAthlete(id: $id) {
+      eventAthletes {
+        id
+        cost
+        winnings
+        athlete {
+          name
+        }
+      }
+    }
+  }
+`
+
 const createEventAthleteStore = () => {
   const { subscribe, update} = writable({loading: false, eventAthletes: [], availableAthletes: [], pendingAthletes: []})
 
@@ -96,6 +111,11 @@ const createEventAthleteStore = () => {
             eventAthletes: store.eventAthletes.map(athlete => athlete.id === id ? { ...athlete, cost, winnings } : athlete)
           }))
         )
+    },
+    removeAthlete({ id }) {
+      return api.graph(REMOVE_ATHLETE_QUERY, { id })
+        .then(({ removeEventAthlete }) => removeEventAthlete)
+        .then(({ eventAthletes }) => update(store => ({ ...store, eventAthletes })))
     }
   }
 }

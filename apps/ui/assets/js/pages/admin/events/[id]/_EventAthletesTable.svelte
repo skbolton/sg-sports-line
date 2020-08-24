@@ -38,6 +38,15 @@
     }
   }
 
+  const onEventAthleteDelete = athlete => {
+    dispatch(
+      'eventAthleteDeleted',
+      {
+        id: athlete.id
+      }
+    )
+  }
+
   const onPendingAthleteSave = pendingAthlete => {
     dispatch(
       'pendingAthleteSaved',
@@ -66,7 +75,9 @@
           <td>
             <div class="field has-addons">
               <div class="control">
-                <a class="button is-danger"><i class="ri-delete-bin-line"></i></a>
+                <a class="button is-danger" on:click={() => onEventAthleteDelete(ea)}>
+                  <i class="ri-delete-bin-line"></i>
+                </a>
               </div>
               <div class="control">
                 <button class="button is-primary" disabled={!changes} on:click={onEventAthleteSave}><i class="ri-save-line"></i></button>
