@@ -39,6 +39,7 @@
 <table class="table is-fullwidth is-hoverable is-bordered">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Name</th>
       <th>Cost</th>
       <th>Winnings</th>
@@ -48,6 +49,19 @@
     {#each eventAthletes as ea}
       {#if selectedAthlete && ea.id === selectedAthlete.id}
         <tr>
+          <td>
+            <div class="field has-addons">
+              <div class="control">
+                <a class="button is-danger"><i class="ri-delete-bin-line"></i></a>
+              </div>
+              <div class="control">
+                <button class="button is-primary" disabled={!changes} on:click={onEventAthleteSave}><i class="ri-save-line"></i></button>
+              </div>
+              <div class="control">
+                <a class="button is-light" on:click={onCancel}><i class="ri-close-line"></i></a>
+              </div>
+            </div>
+          </td>
           <td>
             {ea.athlete.name}
           </td>
@@ -59,21 +73,16 @@
             </div>
           </td>
           <td>
-            <div class="field has-addons">
+            <div class="field">
               <div class="control">
                 <input class="input" type="text" bind:value={editedWinnings}>
-              </div>
-              <div class="control">
-                <button class="button is-primary" disabled={!changes} on:click={onEventAthleteSave}>Save</button>
-              </div>
-              <div class="control">
-                <a class="button is-light" on:click={onCancel}>Cancel</a>
               </div>
             </div>
           </td>
         </tr>
       {:else}
         <tr on:click={() => selectAthlete(ea)}>
+          <td>{ea.id}</td>
           <td>{ea.athlete.name}</td>
           <td>{ea.cost}</td>
           <td>{ea.winnings}</td>
