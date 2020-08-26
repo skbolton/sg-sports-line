@@ -7,7 +7,7 @@
 
   let sortBy = "name"
   let direction = "asc"
-  $: sortedAthletes = eventAthletes.slice()
+  $: sortedAthletes = [...eventAthletes]
   let selectedAthlete = null
   let editedCost = null
   let editedWinnings = null
@@ -19,11 +19,31 @@
   }
 
   $: if (sortBy === "name") {
-    sortedAthletes = sortedAthletes.sort((a, b) => direction === "asc" ? a.athlete.name > b.athlete.name : a.athlete.name < b.athlete.name)
+    sortedAthletes = sortedAthletes.sort((a, b) =>
+      direction === "asc"
+        ? a.athlete.name > b.athlete.name
+          ? -1
+          : 1
+        : a.athlete.name < b.athlete.name
+          ? -1
+          : 1
+    )
 
    } else {
-     sortedAthletes = sortedAthletes.sort((a, b) => direction === "asc" ? parseFloat(a[sortBy]) > parseFloat(b[sortBy]) : parseFloat(a[sortBy]) < parseFloat(b[sortBy]))
-  }
+     // column is winnings or cost or id
+     sortedAthletes = sortedAthletes.sort((a, b) =>
+       direction === "asc"
+         ? parseFloat(a[sortBy]) > parseFloat(b[sortBy])
+            ? -1
+            : 1
+         : parseFloat(a[sortBy]) < parseFloat(b[sortBy])
+            ? -1
+            : 1
+     )
+     console.log(sortedAthletes, 'sorted')
+   }
+
+  $: console.log(sortedAthletes)
 
   $: changes = (selectedAthlete
     && (selectedAthlete.cost !== editedCost || selectedAthlete.winnings !== editedWinnings))
