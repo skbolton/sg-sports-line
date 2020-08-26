@@ -40,10 +40,7 @@
             ? -1
             : 1
      )
-     console.log(sortedAthletes, 'sorted')
    }
-
-  $: console.log(sortedAthletes)
 
   $: changes = (selectedAthlete
     && (selectedAthlete.cost !== editedCost || selectedAthlete.winnings !== editedWinnings))
