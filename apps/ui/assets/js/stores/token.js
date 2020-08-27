@@ -1,6 +1,20 @@
+import decode from 'jwt-decode'
+
 class TokenStorage {
   constructor () {
-    this._token = localStorage.getItem("token") || null
+    const token = localStorage.getItem("token")
+
+    this._token = token && !this.expired(token)
+      ? token
+      : null
+  }
+
+  expired(token) {
+    decoded = decode(token)
+
+    return decode.exp
+      ? Date.now() > decoded.exp
+      : true
   }
 
   get token() {
