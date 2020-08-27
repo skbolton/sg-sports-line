@@ -10,7 +10,7 @@ class TokenStorage {
   }
 
   expired(token) {
-    decoded = decode(token)
+    const decoded = decode(token)
 
     return decode.exp
       ? Date.now() > decoded.exp
