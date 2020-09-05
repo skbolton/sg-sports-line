@@ -1,30 +1,31 @@
 import decode from 'jwt-decode'
+import { writable } from 'svelte/store'
 
-class TokenStorage {
-  constructor () {
-    const token = localStorage.getItem("token")
-
-    this._token = token && !this.expired(token)
-      ? token
-      : null
+const checkExpiration = token => {
+  if (token === null) {
+    return null
   }
 
-  expired(token) {
-    const decoded = decode(token)
+  const { exp } = decode(token)
 
-    return decode.exp
-      ? Date.now() > decoded.exp
-      : true
+  if (Date.now() > exp * 1000) {
+    return null
   }
 
-  get token() {
-    return this._token
-  }
+  return token
+}
 
-  set token(val) {
-    this._token = val
-    localStorage.setItem("token", val)
+const createTokenStore = () => {
+  const token = checkExpiration(localStorage.getItem("token"))
+  const store = writable(token)
+
+  return {
+    subscribe: store.subscribe,
+    set(token) {
+      localStorage.setItem("token", token)
+      return store.set(token)
+    }
   }
 }
 
-export default new TokenStorage()
+export default createTokenStore()

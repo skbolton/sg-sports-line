@@ -12,11 +12,16 @@ const instance = axios.create({
 
 // Request
 instance.interceptors.request.use(config => {
-  const token = tokenStore.token
-  if (token) {
-    config.headers.authorization = `Bearer ${token}`
-  }
-  return config
+  return new Promise(resolve => {
+    const unsubscribe = tokenStore.subscribe(token => {
+      if (token) {
+        config.headers.authorization = `Bearer ${token}`
+      }
+
+      resolve(config)
+    })
+    unsubscribe()
+  })
 })
 
 instance.graph = (query, variables) => 

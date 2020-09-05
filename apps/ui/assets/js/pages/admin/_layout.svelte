@@ -4,7 +4,7 @@
 
 </script>
 
-{#if $adminStore === "true" || $adminStore === true}
+{#if $adminStore}
   <slot></slot>
 {:else}
   <div class="hero is-large">

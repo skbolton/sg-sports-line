@@ -1,17 +1,15 @@
-import { writable } from 'svelte/store'
+import { derived } from 'svelte/store'
+import decode from 'jwt-decode'
+import tokenStore from '@stores/token'
 
-const {subscribe, set} = writable(localStorage.getItem("admin") || "false")
+const adminStore = derived(tokenStore, $token => {
+  if ($token) {
+    const { admin = false } = decode($token)
 
-const adminStore = {
-  subscribe,
-  storeAdmin (isAdmin) {
-    localStorage.setItem("admin", isAdmin)
-    set(isAdmin)
-  },
-  clearAdmin() {
-    localStorage.setItem("admin", false)
-    set(false)
+    return admin
   }
-}
+
+  return false
+})
 
 export default adminStore
